@@ -46,13 +46,15 @@
             TsbBorrar = new ToolStripButton();
             TsbEditar = new ToolStripButton();
             toolStripSeparator1 = new ToolStripSeparator();
-            TsbFiltrar = new ToolStripButton();
             TsbActualizar = new ToolStripButton();
             toolStripSeparator2 = new ToolStripSeparator();
             TsbImprimir = new ToolStripButton();
             toolStripSeparator3 = new ToolStripSeparator();
             TsbCerrar = new ToolStripButton();
             toolStrip1 = new ToolStrip();
+            TsbFiltrar = new ToolStripDropDownButton();
+            textoToolStripMenuItem = new ToolStripMenuItem();
+            paísToolStripMenuItem = new ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
@@ -234,16 +236,6 @@
             toolStripSeparator1.Name = "toolStripSeparator1";
             toolStripSeparator1.Size = new Size(6, 62);
             // 
-            // TsbFiltrar
-            // 
-            TsbFiltrar.Image = Properties.Resources.filter_40px;
-            TsbFiltrar.ImageScaling = ToolStripItemImageScaling.None;
-            TsbFiltrar.ImageTransparentColor = Color.Magenta;
-            TsbFiltrar.Name = "TsbFiltrar";
-            TsbFiltrar.Size = new Size(44, 59);
-            TsbFiltrar.Text = "Filtrar";
-            TsbFiltrar.TextImageRelation = TextImageRelation.ImageAboveText;
-            // 
             // TsbActualizar
             // 
             TsbActualizar.Image = Properties.Resources.Update;
@@ -253,6 +245,7 @@
             TsbActualizar.Size = new Size(63, 59);
             TsbActualizar.Text = "Actualizar";
             TsbActualizar.TextImageRelation = TextImageRelation.ImageAboveText;
+            TsbActualizar.Click += TsbActualizar_Click;
             // 
             // toolStripSeparator2
             // 
@@ -294,6 +287,31 @@
             toolStrip1.TabIndex = 4;
             toolStrip1.Text = "toolStrip1";
             // 
+            // TsbFiltrar
+            // 
+            TsbFiltrar.DropDownItems.AddRange(new ToolStripItem[] { textoToolStripMenuItem, paísToolStripMenuItem });
+            TsbFiltrar.Image = Properties.Resources.filter_40px;
+            TsbFiltrar.ImageScaling = ToolStripItemImageScaling.None;
+            TsbFiltrar.ImageTransparentColor = Color.Magenta;
+            TsbFiltrar.Name = "TsbFiltrar";
+            TsbFiltrar.Size = new Size(53, 59);
+            TsbFiltrar.Text = "Filtrar";
+            TsbFiltrar.TextImageRelation = TextImageRelation.ImageAboveText;
+            // 
+            // textoToolStripMenuItem
+            // 
+            textoToolStripMenuItem.Name = "textoToolStripMenuItem";
+            textoToolStripMenuItem.Size = new Size(180, 22);
+            textoToolStripMenuItem.Text = "Texto";
+            textoToolStripMenuItem.Click += textoToolStripMenuItem_Click;
+            // 
+            // paísToolStripMenuItem
+            // 
+            paísToolStripMenuItem.Name = "paísToolStripMenuItem";
+            paísToolStripMenuItem.Size = new Size(180, 22);
+            paísToolStripMenuItem.Text = "País";
+            paísToolStripMenuItem.Click += paísToolStripMenuItem_Click;
+            // 
             // FrmProvinciasEstados
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -332,7 +350,6 @@
         private ToolStripButton TsbBorrar;
         private ToolStripButton TsbEditar;
         private ToolStripSeparator toolStripSeparator1;
-        private ToolStripButton TsbFiltrar;
         private ToolStripButton TsbActualizar;
         private ToolStripSeparator toolStripSeparator2;
         private ToolStripButton TsbImprimir;
@@ -342,5 +359,8 @@
         private DataGridViewTextBoxColumn colId;
         private DataGridViewTextBoxColumn colProvinciaEstado;
         private DataGridViewTextBoxColumn colPais;
+        private ToolStripDropDownButton TsbFiltrar;
+        private ToolStripMenuItem textoToolStripMenuItem;
+        private ToolStripMenuItem paísToolStripMenuItem;
     }
 }
