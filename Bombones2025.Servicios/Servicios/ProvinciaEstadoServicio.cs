@@ -17,5 +17,24 @@ namespace Bombones2025.Servicios.Servicios
         {
             return _provinciaRepositorio.GetLista(paisId,textoFiltro);
         }
+
+        public bool Guardar(ProvinciaEstado provinciaEstado, out List<string> errores)
+        {
+            errores = new List<string>();
+            //if (_frutoRepositorio.Existe(fruto))
+            //{
+            //    errores.Add("Fruto existente!!!");
+            //    return false;
+            //}
+            if (provinciaEstado.ProvinciaEstadoId == 0)
+            {
+                _provinciaRepositorio.Agregar(provinciaEstado);
+                return true;
+
+            }
+            //_frutoRepositorio.Editar(fruto);
+            return false;
+
+        }
     }
 }

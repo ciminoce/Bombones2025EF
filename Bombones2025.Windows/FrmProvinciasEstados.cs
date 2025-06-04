@@ -128,5 +128,39 @@ namespace Bombones2025.Windows
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void TsbNuevo_Click(object sender, EventArgs e)
+        {
+            FrmProvinciaEstadoAE frm = new FrmProvinciaEstadoAE(_paisServicio) { Text = "Agregar Fruto Seco" };
+            DialogResult dr = frm.ShowDialog(this);
+            if (dr == DialogResult.Cancel) return;
+            ProvinciaEstado? provEstado = frm.GetProvincia();
+            if (provEstado is null) return;
+            try
+            {
+                if (_provinciaServicio.Guardar(provEstado, out var errores))
+                {
+                    DataGridViewRow r = GridHelper.ConstruirFila(dgvDatos);
+                    GridHelper.SetearFila(r, provEstado);
+                    GridHelper.AgregarFila(r, dgvDatos);
+                    MessageBox.Show("Registro Agregado", "Información",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                }
+
+                else
+                {
+                    MessageBox.Show(errores.First(), "Error",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message, "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+        }
     }
 }
