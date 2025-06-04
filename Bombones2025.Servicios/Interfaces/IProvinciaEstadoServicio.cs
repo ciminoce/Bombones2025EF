@@ -4,6 +4,6 @@ namespace Bombones2025.Servicios.Interfaces
 {
     public interface IProvinciaEstadoServicio
     {
-        List<ProvinciaEstado> GetLista();
+        List<ProvinciaEstado> GetLista(int? paisId=null, string? textoFiltro=null);
     }
 }

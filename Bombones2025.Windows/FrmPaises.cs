@@ -87,6 +87,7 @@ namespace Bombones2025.Windows
 
         private void TsbBorrar_Click(object sender, EventArgs e)
         {
+            //TODO:OJO Ver esto JODER
             if (dgvDatos.SelectedRows.Count == 0)
             {
                 return;

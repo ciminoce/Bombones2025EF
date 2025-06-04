@@ -41,44 +41,44 @@
             // 
             CboPaises.DropDownStyle = ComboBoxStyle.DropDownList;
             CboPaises.FormattingEnabled = true;
-            CboPaises.Location = new Point(139, 48);
-            CboPaises.Margin = new Padding(3, 4, 3, 4);
+            CboPaises.Location = new Point(122, 36);
             CboPaises.Name = "CboPaises";
-            CboPaises.Size = new Size(390, 28);
+            CboPaises.Size = new Size(342, 23);
             CboPaises.TabIndex = 20;
+            CboPaises.SelectedIndexChanged += CboPaises_SelectedIndexChanged;
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(53, 49);
+            label2.Location = new Point(46, 37);
             label2.Name = "label2";
-            label2.Size = new Size(37, 20);
+            label2.Size = new Size(31, 15);
             label2.TabIndex = 19;
             label2.Text = "País:";
             // 
             // BtnCancelar
             // 
             BtnCancelar.Image = Properties.Resources.Cancelar;
-            BtnCancelar.Location = new Point(435, 138);
-            BtnCancelar.Margin = new Padding(3, 4, 3, 4);
+            BtnCancelar.Location = new Point(381, 104);
             BtnCancelar.Name = "BtnCancelar";
-            BtnCancelar.Size = new Size(86, 69);
+            BtnCancelar.Size = new Size(75, 52);
             BtnCancelar.TabIndex = 17;
             BtnCancelar.Text = "Cancelar";
             BtnCancelar.TextImageRelation = TextImageRelation.ImageAboveText;
             BtnCancelar.UseVisualStyleBackColor = true;
+            BtnCancelar.Click += BtnCancelar_Click;
             // 
             // BtnOK
             // 
             BtnOK.Image = Properties.Resources.Aceptar1;
-            BtnOK.Location = new Point(48, 138);
-            BtnOK.Margin = new Padding(3, 4, 3, 4);
+            BtnOK.Location = new Point(42, 104);
             BtnOK.Name = "BtnOK";
-            BtnOK.Size = new Size(86, 69);
+            BtnOK.Size = new Size(75, 52);
             BtnOK.TabIndex = 18;
             BtnOK.Text = "OK";
             BtnOK.TextImageRelation = TextImageRelation.ImageAboveText;
             BtnOK.UseVisualStyleBackColor = true;
+            BtnOK.Click += BtnOK_Click;
             // 
             // errorProvider1
             // 
@@ -86,13 +86,14 @@
             // 
             // FrmFiltroPorPais
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(607, 240);
+            ClientSize = new Size(531, 180);
             Controls.Add(CboPaises);
             Controls.Add(label2);
             Controls.Add(BtnCancelar);
             Controls.Add(BtnOK);
+            Margin = new Padding(3, 2, 3, 2);
             Name = "FrmFiltroPorPais";
             Text = "FrmFiltroPorPais";
             ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();

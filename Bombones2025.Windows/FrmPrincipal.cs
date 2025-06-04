@@ -104,9 +104,14 @@ namespace Bombones2025.Windows
 
         private void BtnProvincias_Click(object sender, EventArgs e)
         {
-            IProvinciaEstadoServicio servicio = AppServices.ServiceProvider!
+            IProvinciaEstadoServicio provinciaServicio = AppServices.ServiceProvider!
     .GetRequiredService<IProvinciaEstadoServicio>();
-            FrmProvinciasEstados frm = new FrmProvinciasEstados(servicio) { Text = "Listado de Provincias/Estados" };
+            IPaisServicio paisServicio = AppServices.ServiceProvider!
+    .GetRequiredService<IPaisServicio>();
+
+            FrmProvinciasEstados frm = new FrmProvinciasEstados(
+                provinciaServicio,
+                paisServicio) { Text = "Listado de Provincias/Estados" };
             frm.ShowDialog(this);
 
         }
