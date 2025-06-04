@@ -30,7 +30,7 @@ namespace Bombones2025.Servicios.Servicios
             return true;
         }
 
-        public bool Agregar(Relleno relleno, out List<string> errores)
+        public bool Guardar(Relleno relleno, out List<string> errores)
         {
             errores = new List<string>();
             if (_rellenoRepositorio.Existe(relleno))
@@ -38,20 +38,16 @@ namespace Bombones2025.Servicios.Servicios
                 errores.Add("País existente!!!");
                 return false;
             }
-            _rellenoRepositorio.Agregar(relleno);
-            return true;
-        }
-
-        public bool Editar(Relleno relleno, out List<string> errores)
-        {
-            errores = new List<string>();
-            if (_rellenoRepositorio.Existe(relleno))
+            if (relleno.RellenoId==0)
             {
-                errores.Add("Relleno existente!!! " + Environment.NewLine + "Edición denegada");
-                return false;
+                _rellenoRepositorio.Agregar(relleno);
+                return true;
+
             }
             _rellenoRepositorio.Editar(relleno);
             return true;
+
         }
+
     }
 }

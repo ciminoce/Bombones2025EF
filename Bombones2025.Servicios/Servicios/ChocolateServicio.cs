@@ -33,7 +33,7 @@ namespace Bombones2025.Servicios.Servicios
             return true;
         }
 
-        public bool Agregar(Chocolate chocolate, out List<string> errores)
+        public bool Guardar(Chocolate chocolate, out List<string> errores)
         {
             errores=new List<string>();
             if (_chocolateRepositorio!.Existe(chocolate))
@@ -41,20 +41,15 @@ namespace Bombones2025.Servicios.Servicios
                 errores.Add("Chocolate existente!!!");
                 return false;
             }
-            _chocolateRepositorio.Agregar(chocolate);
-            return true;
-        }
-
-        public bool Editar(Chocolate chocolate, out List<string> errores)
-        {
-            errores = new List<string>();
-            if (_chocolateRepositorio!.Existe(chocolate))
+            if (chocolate.ChocolateId == 0)
             {
-                errores.Add("Chocolate existente!!! " + Environment.NewLine + "Edición denegada");
-                return false;
+                _chocolateRepositorio.Agregar(chocolate);
+                return true;
+
             }
             _chocolateRepositorio.Editar(chocolate);
             return true;
         }
+
     }
 }

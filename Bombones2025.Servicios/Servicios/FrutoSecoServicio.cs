@@ -22,7 +22,7 @@ namespace Bombones2025.Servicios.Servicios
             return _frutoRepositorio.GetLista(textoFiltro);
         }
 
-        public bool Agregar(FrutoSeco fruto, out List<string> errores)
+        public bool Guardar(FrutoSeco fruto, out List<string> errores)
         {
             errores = new List<string>();
             if (_frutoRepositorio.Existe(fruto))
@@ -30,21 +30,17 @@ namespace Bombones2025.Servicios.Servicios
                 errores.Add("Fruto existente!!!");
                 return false;
             }
-            _frutoRepositorio.Agregar(fruto);
-            return true;
-        }
-
-        public bool Editar(FrutoSeco fruto, out List<string> errores)
-        {
-            errores = new List<string>();
-            if (_frutoRepositorio.Existe(fruto))
+            if (fruto.FrutoSecoId==0)
             {
-                errores.Add("Fruto existente!!! " + Environment.NewLine + "Edición denegada");
-                return false;
+                _frutoRepositorio.Agregar(fruto);
+                return true;
+
             }
             _frutoRepositorio.Editar(fruto);
             return true;
+
         }
+
 
         public bool Borrar(int frutoId, out List<string> errores)
         {

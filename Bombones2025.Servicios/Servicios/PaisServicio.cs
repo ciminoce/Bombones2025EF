@@ -12,7 +12,7 @@ namespace Bombones2025.Servicios.Servicios
             _paisRepositorio = paisRepositorio;
         }
 
-        public bool Agregar(Pais pais, out List<string> errores)
+        public bool Guardar(Pais pais, out List<string> errores)
         {
             errores = new List<string>();
             if (_paisRepositorio.Existe(pais))
@@ -20,8 +20,15 @@ namespace Bombones2025.Servicios.Servicios
                 errores.Add("País existente!!!");
                 return false;
             }
-            _paisRepositorio.Agregar(pais);
+            if (pais.PaisId==0)
+            {
+                _paisRepositorio.Agregar(pais);
+                return true;
+
+            }
+            _paisRepositorio.Editar(pais);
             return true;
+
         }
 
         public bool Borrar(int paisId, out List<string> errores)
@@ -31,17 +38,6 @@ namespace Bombones2025.Servicios.Servicios
             return true;
         }
 
-        public bool Editar(Pais pais, out List<string> errores)
-        {
-            errores = new List<string>();
-            if (_paisRepositorio.Existe(pais))
-            {
-                errores.Add("País existente!!! " + Environment.NewLine + "Edición denegada");
-                return false;
-            }
-            _paisRepositorio.Editar(pais);
-            return true;
-        }
 
         public bool Existe(Pais pais)
         {
