@@ -57,6 +57,7 @@
             TxtUsuario.Name = "TxtUsuario";
             TxtUsuario.Size = new Size(295, 23);
             TxtUsuario.TabIndex = 0;
+            TxtUsuario.Text = "admin";
             // 
             // label2
             // 
@@ -73,6 +74,7 @@
             TxtClave.Name = "TxtClave";
             TxtClave.Size = new Size(295, 23);
             TxtClave.TabIndex = 1;
+            TxtClave.Text = "admin123";
             // 
             // BtnCancelar
             // 

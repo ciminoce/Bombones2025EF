@@ -31,6 +31,9 @@
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             splitContainer1 = new SplitContainer();
             dgvDatos = new DataGridView();
+            colId = new DataGridViewTextBoxColumn();
+            colProvinciaEstado = new DataGridViewTextBoxColumn();
+            colPais = new DataGridViewTextBoxColumn();
             TxtCantidadPaginas = new TextBox();
             CboPaginas = new ComboBox();
             label2 = new Label();
@@ -50,9 +53,6 @@
             toolStripSeparator3 = new ToolStripSeparator();
             TsbCerrar = new ToolStripButton();
             toolStrip1 = new ToolStrip();
-            colId = new DataGridViewTextBoxColumn();
-            colProvinciaEstado = new DataGridViewTextBoxColumn();
-            colPais = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
@@ -102,6 +102,27 @@
             dgvDatos.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvDatos.Size = new Size(800, 444);
             dgvDatos.TabIndex = 2;
+            // 
+            // colId
+            // 
+            colId.HeaderText = "Id";
+            colId.Name = "colId";
+            colId.ReadOnly = true;
+            colId.Visible = false;
+            // 
+            // colProvinciaEstado
+            // 
+            colProvinciaEstado.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            colProvinciaEstado.HeaderText = "Provincia/Estado";
+            colProvinciaEstado.Name = "colProvinciaEstado";
+            colProvinciaEstado.ReadOnly = true;
+            // 
+            // colPais
+            // 
+            colPais.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            colPais.HeaderText = "País";
+            colPais.Name = "colPais";
+            colPais.ReadOnly = true;
             // 
             // TxtCantidadPaginas
             // 
@@ -273,27 +294,6 @@
             toolStrip1.TabIndex = 4;
             toolStrip1.Text = "toolStrip1";
             // 
-            // colId
-            // 
-            colId.HeaderText = "Id";
-            colId.Name = "colId";
-            colId.ReadOnly = true;
-            colId.Visible = false;
-            // 
-            // colProvinciaEstado
-            // 
-            colProvinciaEstado.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            colProvinciaEstado.HeaderText = "Provincia/Estado";
-            colProvinciaEstado.Name = "colProvinciaEstado";
-            colProvinciaEstado.ReadOnly = true;
-            // 
-            // colPais
-            // 
-            colPais.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            colPais.HeaderText = "País";
-            colPais.Name = "colPais";
-            colPais.ReadOnly = true;
-            // 
             // FrmProvinciasEstados
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -304,6 +304,7 @@
             Name = "FrmProvinciasEstados";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Frutos Secos";
+            Load += FrmProvinciasEstados_Load;
             splitContainer1.Panel1.ResumeLayout(false);
             splitContainer1.Panel2.ResumeLayout(false);
             splitContainer1.Panel2.PerformLayout();

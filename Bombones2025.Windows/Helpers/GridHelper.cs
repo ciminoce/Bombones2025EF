@@ -50,7 +50,11 @@ namespace Bombones2025.Windows.Helpers
                     r.Cells[0].Value = fruto.FrutoSecoId;
                     r.Cells[1].Value = fruto.Descripcion;
                     break;
-
+                case ProvinciaEstado provincia:
+                    r.Cells[0].Value = provincia.ProvinciaEstadoId;
+                    r.Cells[1].Value = provincia.NombreProvinciaEstado;
+                    r.Cells[2].Value = provincia.PaisId;
+                    break;
             }
 
             r.Tag = obj;

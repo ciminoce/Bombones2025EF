@@ -28,12 +28,14 @@ namespace Bombones2025.Infraestructura
             services.AddScoped<IChocolateRepositorio, ChocolateRepositorio>();
             services.AddScoped<IFrutoSecoRepositorio, FrutoSecoRepositorio>();
             services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>();
+            services.AddScoped<IProvinciaEstadoRepositorio, ProvinciaEstadoRepositorio>();
 
             services.AddScoped<IPaisServicio, PaisServicio>();
             services.AddScoped<IRellenoServicio, RellenoServicio>();
             services.AddScoped<IChocolateServicio, ChocolateServicio>();
             services.AddScoped<IFrutoSecoServicio, FrutoSecoServicio>();
             services.AddScoped<IUsuarioServicio, UsuarioServicio>();
+            services.AddScoped<IProvinciaEstadoServicio, ProvinciaEstadoServicio>();
 
             _serviceProvider = services.BuildServiceProvider();
 

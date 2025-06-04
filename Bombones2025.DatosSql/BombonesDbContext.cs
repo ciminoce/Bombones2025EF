@@ -17,6 +17,7 @@ namespace Bombones2025.DatosSql
         public DbSet<Relleno> Rellenos{ get; set; }
         public DbSet<FrutoSeco> FrutosSecos { get; set; }
 
+        public DbSet<ProvinciaEstado> ProvinciasEstados { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }
 
     }
