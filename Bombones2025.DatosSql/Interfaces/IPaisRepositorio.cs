@@ -10,5 +10,6 @@ namespace Bombones2025.DatosSql.Interfaces
         bool Existe(Pais pais);
         List<Pais> GetLista(string? textoFiltro=null);
         int GetCantidad();
+        bool EstaRelacionado(int paisId);
     }
 }
