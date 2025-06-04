@@ -13,6 +13,13 @@ namespace Bombones2025.DatosSql.Repositorios
             _dbContext = dbContext;
         }
 
+        public void Agregar(ProvinciaEstado provinciaEstado)
+        {
+            //TODO: Solucionar esto coño!!
+            _dbContext.ProvinciasEstados.Add(provinciaEstado);
+            _dbContext.SaveChanges();
+        }
+
         public List<ProvinciaEstado> GetLista(int? paisId = null, string? textoFiltro=null)
         {
             IQueryable<ProvinciaEstado> query = _dbContext.ProvinciasEstados

@@ -210,6 +210,7 @@
             TsbNuevo.Size = new Size(46, 59);
             TsbNuevo.Text = "Nuevo";
             TsbNuevo.TextImageRelation = TextImageRelation.ImageAboveText;
+            TsbNuevo.Click += TsbNuevo_Click;
             // 
             // TsbBorrar
             // 
