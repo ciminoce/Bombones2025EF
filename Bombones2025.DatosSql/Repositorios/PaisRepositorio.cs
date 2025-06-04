@@ -52,5 +52,11 @@ namespace Bombones2025.DatosSql.Repositorios
                 .ToList();
         }
         public int GetCantidad() => _dbContext.Paises.Count();
+
+        public bool EstaRelacionado(int paisId)
+        {
+            return _dbContext.ProvinciasEstados
+                .Any(pe => pe.PaisId == paisId);
+        }
     }
 }

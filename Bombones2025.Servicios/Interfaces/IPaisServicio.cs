@@ -8,5 +8,6 @@ namespace Bombones2025.Servicios.Interfaces
         bool Existe(Pais pais);
         List<Pais> GetLista(string? textoFiltro = null);
         bool Guardar(Pais pais, out List<string> errores);
+        //bool EstaRelacionado(int paisId);
     }
 }
