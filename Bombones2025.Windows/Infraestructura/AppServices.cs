@@ -2,8 +2,8 @@
 using Bombones2025.DatosSql.Interfaces;
 using Bombones2025.DatosSql.Repositorios;
 using Bombones2025.Servicios.Interfaces;
-using Bombones2025.Servicios.Mappings;
 using Bombones2025.Servicios.Servicios;
+using Bombones2025.Windows.Mappings;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System.Configuration;

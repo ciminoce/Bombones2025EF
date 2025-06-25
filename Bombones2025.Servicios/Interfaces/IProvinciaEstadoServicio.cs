@@ -1,4 +1,5 @@
-﻿using Bombones2025.Entidades.Entidades;
+﻿using Bombones2025.Entidades.DTOs.ProvinciaEstado;
+using Bombones2025.Entidades.Entidades;
 
 namespace Bombones2025.Servicios.Interfaces
 {
@@ -6,7 +7,7 @@ namespace Bombones2025.Servicios.Interfaces
     {
         bool Borrar(int provinciaEstadoId, out List<string> errores);
         ProvinciaEstado? GetById(int provinciaEstadoId);
-        List<ProvinciaEstado> GetLista(int? paisId=null, string? textoFiltro=null);
+        List<ProvinciaEstadoListDto> GetLista(int? paisId=null, string? textoFiltro=null);
         bool Guardar(ProvinciaEstado provinciaEstado, out List<string> errores);
 
     }

@@ -1,4 +1,5 @@
-﻿using Bombones2025.Entidades.Entidades;
+﻿using Bombones2025.Entidades.DTOs.ProvinciaEstado;
+using Bombones2025.Entidades.Entidades;
 using Bombones2025.Servicios.Interfaces;
 using Bombones2025.Windows.Helpers;
 using Bombones2025.Windows.Properties;
@@ -11,7 +12,7 @@ namespace Bombones2025.Windows
         private readonly IPaisServicio _paisServicio;
         private bool filterOn = false;
 
-        private List<ProvinciaEstado>? provincias;
+        private List<ProvinciaEstadoListDto>? provincias;
         public FrmProvinciasEstados(IProvinciaEstadoServicio provinciaServicio, IPaisServicio paisServicio)
         {
             InitializeComponent();

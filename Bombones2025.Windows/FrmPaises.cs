@@ -1,4 +1,5 @@
-﻿using Bombones2025.Entidades.DTOs.Pais;
+﻿using AutoMapper;
+using Bombones2025.Entidades.DTOs.Pais;
 using Bombones2025.Entidades.Entidades;
 using Bombones2025.Servicios.Interfaces;
 using Bombones2025.Windows.Helpers;
@@ -9,14 +10,16 @@ namespace Bombones2025.Windows
     public partial class FrmPaises : Form
     {
         private readonly IPaisServicio _paisServicio;
+        private readonly IMapper _mapper;
 
         private List<PaisListDto> _paises = new();
 
         private bool filterOn = false;
-        public FrmPaises(IPaisServicio paisServicio)
+        public FrmPaises(IPaisServicio paisServicio, IMapper mapper)
         {
             InitializeComponent();
             _paisServicio = paisServicio;
+            _mapper = mapper;
         }
 
         private void FrmPaises_Load(object sender, EventArgs e)
@@ -63,8 +66,9 @@ namespace Bombones2025.Windows
             {
                 if (_paisServicio.Guardar(paisEditDto, out var errores))
                 {
+                    PaisListDto paisListDto = _mapper.Map<PaisListDto>(paisEditDto);
                     DataGridViewRow r = GridHelper.ConstruirFila(dgvDatos);
-                    GridHelper.SetearFila(r, paisEditDto);
+                    GridHelper.SetearFila(r, paisListDto);
                     GridHelper.AgregarFila(r, dgvDatos);
                     MessageBox.Show("Pais agregado", "Mensaje",
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -94,8 +98,8 @@ namespace Bombones2025.Windows
                 return;
             }
             var r = dgvDatos.SelectedRows[0];
-            Pais paisBorrar = (Pais)r.Tag!;
-            DialogResult dr = MessageBox.Show($"¿Desea borrar el pais {paisBorrar}?",
+            PaisListDto paisBorrar = (PaisListDto)r.Tag!;
+            DialogResult dr = MessageBox.Show($"¿Desea borrar el pais {paisBorrar.NombrePais}?",
                 "Confirmar Eliminación",
                 MessageBoxButtons.YesNo, MessageBoxIcon.Question,
                 MessageBoxDefaultButton.Button2);
@@ -130,9 +134,10 @@ namespace Bombones2025.Windows
                 return;
             }
             var r = dgvDatos.SelectedRows[0];
-            PaisEditDto? paisEditDto = (PaisEditDto)r.Tag!;
-            if (paisEditDto == null) return;
-            //Pais? paisEditar = paisEditDto.Clonar();
+            PaisListDto? paisListDto = (PaisListDto)r.Tag!;
+            if (paisListDto == null) return;
+            PaisEditDto? paisEditDto=_paisServicio.GetPorId(paisListDto.PaisId);
+            if (paisEditDto is null) return;
             FrmPaisesAE frm = new FrmPaisesAE() { Text = "Editar País" };
             frm.SetPais(paisEditDto);
             DialogResult dr = frm.ShowDialog(this);
@@ -143,7 +148,8 @@ namespace Bombones2025.Windows
             {
                 if (_paisServicio.Guardar(paisEditDto, out var errores))
                 {
-                    GridHelper.SetearFila(r, paisEditDto);
+                    paisListDto = _mapper.Map<PaisListDto>(paisEditDto);
+                    GridHelper.SetearFila(r, paisListDto);
 
                     MessageBox.Show("Pais editado", "Mensaje",
                         MessageBoxButtons.OK, MessageBoxIcon.Information);

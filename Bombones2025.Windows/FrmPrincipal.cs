@@ -1,4 +1,5 @@
-﻿using Bombones2025.Entidades.Entidades;
+﻿using AutoMapper;
+using Bombones2025.Entidades.Entidades;
 using Bombones2025.Infraestructura;
 using Bombones2025.Servicios.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
@@ -19,7 +20,9 @@ namespace Bombones2025.Windows
             {
                 IPaisServicio servicio = AppServices.ServiceProvider!
                     .GetRequiredService<IPaisServicio>();
-                FrmPaises frm = new FrmPaises(servicio) { Text = "Listado de Paises" };
+                IMapper mapper = AppServices.ServiceProvider!
+                    .GetRequiredService<IMapper>();
+                FrmPaises frm = new FrmPaises(servicio, mapper) { Text = "Listado de Paises" };
                 frm.ShowDialog(this);
 
             }

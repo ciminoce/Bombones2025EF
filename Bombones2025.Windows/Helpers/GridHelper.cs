@@ -1,4 +1,5 @@
 ﻿using Bombones2025.Entidades.DTOs.Pais;
+using Bombones2025.Entidades.DTOs.ProvinciaEstado;
 using Bombones2025.Entidades.Entidades;
 
 namespace Bombones2025.Windows.Helpers
@@ -51,10 +52,10 @@ namespace Bombones2025.Windows.Helpers
                     r.Cells[0].Value = fruto.FrutoSecoId;
                     r.Cells[1].Value = fruto.Descripcion;
                     break;
-                case ProvinciaEstado provincia:
-                    r.Cells[0].Value = provincia.ProvinciaEstadoId;
-                    r.Cells[1].Value = provincia.NombreProvinciaEstado;
-                    r.Cells[2].Value = provincia.Pais!.NombrePais;
+                case ProvinciaEstadoListDto provinciaDto:
+                    r.Cells[0].Value = provinciaDto.ProvinciaEstadoId;
+                    r.Cells[1].Value = provinciaDto.NombreProvinciaEstado;
+                    r.Cells[2].Value = provinciaDto.NombrePais;
                     break;
             }
 

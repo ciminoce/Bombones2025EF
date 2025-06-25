@@ -30,7 +30,10 @@ namespace Bombones2025.DatosSql.Repositorios
 
         public void Editar(Pais pais)
         {
-            _dbContext.Paises.Update(pais);
+            var paisInDb = GetPorId(pais.PaisId);
+            if (paisInDb is null) return;
+            paisInDb.NombrePais = pais.NombrePais;
+            _dbContext.Entry(paisInDb).State = EntityState.Modified;
             _dbContext.SaveChanges();
         }
 
@@ -56,6 +59,12 @@ namespace Bombones2025.DatosSql.Repositorios
         {
             return _dbContext.ProvinciasEstados
                 .Any(pe => pe.PaisId == paisId);
+        }
+
+        public Pais? GetPorId(int paisId)
+        {
+            return _dbContext.Paises.AsNoTracking()
+                .FirstOrDefault(p => p.PaisId == paisId);
         }
     }
 }

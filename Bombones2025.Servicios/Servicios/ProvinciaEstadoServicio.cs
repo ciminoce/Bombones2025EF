@@ -1,4 +1,6 @@
-﻿using Bombones2025.DatosSql.Interfaces;
+﻿using AutoMapper;
+using Bombones2025.DatosSql.Interfaces;
+using Bombones2025.Entidades.DTOs.ProvinciaEstado;
 using Bombones2025.Entidades.Entidades;
 using Bombones2025.Servicios.Interfaces;
 
@@ -7,10 +9,12 @@ namespace Bombones2025.Servicios.Servicios
     public class ProvinciaEstadoServicio : IProvinciaEstadoServicio
     {
         private readonly IProvinciaEstadoRepositorio _provinciaRepositorio;
+        private readonly IMapper _mapper;
 
-        public ProvinciaEstadoServicio(IProvinciaEstadoRepositorio provinciaRepositorio)
+        public ProvinciaEstadoServicio(IProvinciaEstadoRepositorio provinciaRepositorio, IMapper mapper)
         {
             _provinciaRepositorio = provinciaRepositorio;
+            _mapper = mapper;
         }
 
         public bool Borrar(int provinciaEstadoId, out List<string> errores)
@@ -30,9 +34,10 @@ namespace Bombones2025.Servicios.Servicios
             return _provinciaRepositorio.GetById(provinciaEstadoId);
         }
 
-        public List<ProvinciaEstado> GetLista(int? paisId = null, string? textoFiltro = null)
+        public List<ProvinciaEstadoListDto> GetLista(int? paisId = null, string? textoFiltro = null)
         {
-            return _provinciaRepositorio.GetLista(paisId,textoFiltro);
+            var provincias= _provinciaRepositorio.GetLista(paisId,textoFiltro);
+            return _mapper.Map<List<ProvinciaEstadoListDto>>(provincias);
         }
 
         public bool Guardar(ProvinciaEstado provinciaEstado, out List<string> errores)
