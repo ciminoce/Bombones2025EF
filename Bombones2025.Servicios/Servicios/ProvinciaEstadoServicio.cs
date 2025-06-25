@@ -13,6 +13,23 @@ namespace Bombones2025.Servicios.Servicios
             _provinciaRepositorio = provinciaRepositorio;
         }
 
+        public bool Borrar(int provinciaEstadoId, out List<string> errores)
+        {
+            errores=new List<string>();
+            if (_provinciaRepositorio.EstaRelacionado(provinciaEstadoId))
+            {
+                errores.Add("Registro relacionado... Baja denegada");
+                return false;
+            }
+            _provinciaRepositorio.Borrar(provinciaEstadoId);
+            return true;
+        }
+
+        public ProvinciaEstado? GetById(int provinciaEstadoId)
+        {
+            return _provinciaRepositorio.GetById(provinciaEstadoId);
+        }
+
         public List<ProvinciaEstado> GetLista(int? paisId = null, string? textoFiltro = null)
         {
             return _provinciaRepositorio.GetLista(paisId,textoFiltro);
@@ -21,19 +38,19 @@ namespace Bombones2025.Servicios.Servicios
         public bool Guardar(ProvinciaEstado provinciaEstado, out List<string> errores)
         {
             errores = new List<string>();
-            //if (_frutoRepositorio.Existe(fruto))
-            //{
-            //    errores.Add("Fruto existente!!!");
-            //    return false;
-            //}
+            if (_provinciaRepositorio.Existe(provinciaEstado))
+            {
+                errores.Add("Provincia/Estado existente!!!");
+                return false;
+            }
             if (provinciaEstado.ProvinciaEstadoId == 0)
             {
                 _provinciaRepositorio.Agregar(provinciaEstado);
                 return true;
 
             }
-            //_frutoRepositorio.Editar(fruto);
-            return false;
+            _provinciaRepositorio.Editar(provinciaEstado) ;
+            return true;
 
         }
     }

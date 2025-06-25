@@ -1,4 +1,5 @@
-﻿namespace Bombones2025.Entidades.Entidades
+﻿
+namespace Bombones2025.Entidades.Entidades
 {
     public class ProvinciaEstado
     {
@@ -7,5 +8,19 @@
         public int PaisId { get; set; }
         public Pais? Pais { get; set; }//Navegacion
 
+        public ProvinciaEstado? Clonar()
+        {
+            return new ProvinciaEstado
+            {
+                ProvinciaEstadoId = ProvinciaEstadoId,
+                NombreProvinciaEstado = NombreProvinciaEstado,
+                PaisId = PaisId
+            };
+        }
+
+        public override string ToString()
+        {
+            return $"{NombreProvinciaEstado}";
+        }
     }
 }

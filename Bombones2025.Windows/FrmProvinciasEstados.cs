@@ -140,14 +140,91 @@ namespace Bombones2025.Windows
             {
                 if (_provinciaServicio.Guardar(provEstado, out var errores))
                 {
+                    ProvinciaEstado? peAgregado = _provinciaServicio.GetById(provEstado.ProvinciaEstadoId);
                     DataGridViewRow r = GridHelper.ConstruirFila(dgvDatos);
-                    GridHelper.SetearFila(r, provEstado);
+                    GridHelper.SetearFila(r, peAgregado!);
                     GridHelper.AgregarFila(r, dgvDatos);
                     MessageBox.Show("Registro Agregado", "Información",
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 }
 
+                else
+                {
+                    MessageBox.Show(errores.First(), "Error",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message, "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+        }
+
+        private void TsbBorrar_Click(object sender, EventArgs e)
+        {
+            if (dgvDatos.SelectedRows.Count == 0) return;
+            DataGridViewRow r = dgvDatos.SelectedRows[0];
+            ProvinciaEstado? pe = r.Tag as ProvinciaEstado;
+            if (pe is null) return;
+            DialogResult dr = MessageBox.Show($"¿Desea borrar el registro de {pe}?",
+                "Confirmar Baja",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question,
+                MessageBoxDefaultButton.Button2);
+            if (dr == DialogResult.No) return;
+            try
+            {
+                if (_provinciaServicio.Borrar(pe.ProvinciaEstadoId, out var errores))
+                {
+                    GridHelper.QuitarFila(r, dgvDatos);
+                    MessageBox.Show("Registro Eliminado", "Información",
+                            MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                }
+                else
+                {
+                    MessageBox.Show(errores.First(), "Error",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message, "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+        }
+
+        private void TsbEditar_Click(object sender, EventArgs e)
+        {
+            if (dgvDatos.SelectedRows.Count == 0) return;
+            DataGridViewRow r = dgvDatos.SelectedRows[0];
+            ProvinciaEstado? pe = r.Tag as ProvinciaEstado;
+            if (pe is null) return;
+            ProvinciaEstado? peEditar = pe.Clonar();
+            if (peEditar is null) return;
+            FrmProvinciaEstadoAE frm = new FrmProvinciaEstadoAE(_paisServicio) { Text = "Editar Fruto Seco" };
+            frm.SetProvincia(peEditar);
+            DialogResult dr = frm.ShowDialog(this);
+            if (dr == DialogResult.Cancel) return;
+            peEditar = frm.GetProvincia();
+            if (peEditar is null) return;
+            try
+            {
+                if (_provinciaServicio.Guardar(peEditar, out var errores))
+                {
+                    ProvinciaEstado? peEditado = _provinciaServicio.GetById(peEditar.ProvinciaEstadoId);
+                    GridHelper.SetearFila(r, peEditado!);
+                    MessageBox.Show("Registro Editado", "Información",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                }
                 else
                 {
                     MessageBox.Show(errores.First(), "Error",

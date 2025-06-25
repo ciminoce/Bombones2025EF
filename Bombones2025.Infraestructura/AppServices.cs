@@ -2,6 +2,7 @@
 using Bombones2025.DatosSql.Interfaces;
 using Bombones2025.DatosSql.Repositorios;
 using Bombones2025.Servicios.Interfaces;
+using Bombones2025.Servicios.Mappings;
 using Bombones2025.Servicios.Servicios;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -37,6 +38,7 @@ namespace Bombones2025.Infraestructura
             services.AddScoped<IUsuarioServicio, UsuarioServicio>();
             services.AddScoped<IProvinciaEstadoServicio, ProvinciaEstadoServicio>();
 
+            services.AddAutoMapper(typeof(MappingProfile).Assembly);
             _serviceProvider = services.BuildServiceProvider();
 
         }

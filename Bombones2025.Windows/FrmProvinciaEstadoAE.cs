@@ -1,15 +1,6 @@
 ﻿using Bombones2025.Entidades.Entidades;
 using Bombones2025.Servicios.Interfaces;
 using Bombones2025.Windows.Helpers;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace Bombones2025.Windows
 {
@@ -26,6 +17,11 @@ namespace Bombones2025.Windows
         {
             base.OnLoad(e);
             CombosHelper.CargarComboPaises(ref CboPaises, _paisServicio);
+            if(provinciaEstado is not null)
+            {
+                TxtProvincia.Text = provinciaEstado.NombreProvinciaEstado;
+                CboPaises.SelectedValue = provinciaEstado.PaisId;
+            }
         }
         public ProvinciaEstado? GetProvincia()
         {
@@ -47,7 +43,7 @@ namespace Bombones2025.Windows
                 }
                 provinciaEstado.NombreProvinciaEstado = TxtProvincia.Text;
                 provinciaEstado.PaisId = (int)CboPaises.SelectedValue!;
-                provinciaEstado.Pais = (Pais)CboPaises.SelectedItem!;
+                //provinciaEstado.Pais = (Pais)CboPaises.SelectedItem!;
 
                 DialogResult = DialogResult.OK;
             }
@@ -69,6 +65,11 @@ namespace Bombones2025.Windows
             }
             return valido;
 
+        }
+
+        public void SetProvincia(ProvinciaEstado peEditar)
+        {
+            provinciaEstado = peEditar;
         }
     }
 }

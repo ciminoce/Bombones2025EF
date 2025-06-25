@@ -1,4 +1,5 @@
-﻿using Bombones2025.Entidades.Entidades;
+﻿using Bombones2025.Entidades.DTOs.Pais;
+using Bombones2025.Entidades.Entidades;
 using Bombones2025.Servicios.Interfaces;
 using Bombones2025.Windows.Helpers;
 using Bombones2025.Windows.Properties;
@@ -9,7 +10,7 @@ namespace Bombones2025.Windows
     {
         private readonly IPaisServicio _paisServicio;
 
-        private List<Pais> _paises = new();
+        private List<PaisListDto> _paises = new();
 
         private bool filterOn = false;
         public FrmPaises(IPaisServicio paisServicio)
@@ -38,7 +39,7 @@ namespace Bombones2025.Windows
         private void MostrarDatosEnGrilla()
         {
             GridHelper.LimpiarGrilla(dgvDatos);
-            foreach (Pais pais in _paises)
+            foreach (PaisListDto pais in _paises)
             {
                 DataGridViewRow r = GridHelper.ConstruirFila(dgvDatos);
                 GridHelper.SetearFila(r, pais);
@@ -56,14 +57,14 @@ namespace Bombones2025.Windows
             FrmPaisesAE frm = new FrmPaisesAE() { Text = "Nuevo País" };
             DialogResult dr = frm.ShowDialog(this);
             if (dr == DialogResult.Cancel) return;
-            Pais? pais = frm.GetPais();
-            if (pais == null) return;
+            PaisEditDto? paisEditDto = frm.GetPais();
+            if (paisEditDto == null) return;
             try
             {
-                if (_paisServicio.Guardar(pais, out var errores))
+                if (_paisServicio.Guardar(paisEditDto, out var errores))
                 {
                     DataGridViewRow r = GridHelper.ConstruirFila(dgvDatos);
-                    GridHelper.SetearFila(r, pais);
+                    GridHelper.SetearFila(r, paisEditDto);
                     GridHelper.AgregarFila(r, dgvDatos);
                     MessageBox.Show("Pais agregado", "Mensaje",
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -129,20 +130,20 @@ namespace Bombones2025.Windows
                 return;
             }
             var r = dgvDatos.SelectedRows[0];
-            Pais? pais = (Pais)r.Tag!;
-            if (pais == null) return;
-            Pais? paisEditar = pais.Clonar();
+            PaisEditDto? paisEditDto = (PaisEditDto)r.Tag!;
+            if (paisEditDto == null) return;
+            //Pais? paisEditar = paisEditDto.Clonar();
             FrmPaisesAE frm = new FrmPaisesAE() { Text = "Editar País" };
-            frm.SetPais(paisEditar);
+            frm.SetPais(paisEditDto);
             DialogResult dr = frm.ShowDialog(this);
             if (dr == DialogResult.Cancel) return;
-            paisEditar = frm.GetPais();
-            if (paisEditar == null) return;
+            paisEditDto = frm.GetPais();
+            if (paisEditDto == null) return;
             try
             {
-                if (_paisServicio.Guardar(paisEditar, out var errores))
+                if (_paisServicio.Guardar(paisEditDto, out var errores))
                 {
-                    GridHelper.SetearFila(r, paisEditar);
+                    GridHelper.SetearFila(r, paisEditDto);
 
                     MessageBox.Show("Pais editado", "Mensaje",
                         MessageBoxButtons.OK, MessageBoxIcon.Information);

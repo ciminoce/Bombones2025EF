@@ -221,6 +221,7 @@
             TsbBorrar.Size = new Size(44, 59);
             TsbBorrar.Text = "Borrar";
             TsbBorrar.TextImageRelation = TextImageRelation.ImageAboveText;
+            TsbBorrar.Click += TsbBorrar_Click;
             // 
             // TsbEditar
             // 
@@ -231,6 +232,7 @@
             TsbEditar.Size = new Size(44, 59);
             TsbEditar.Text = "Editar";
             TsbEditar.TextImageRelation = TextImageRelation.ImageAboveText;
+            TsbEditar.Click += TsbEditar_Click;
             // 
             // toolStripSeparator1
             // 
@@ -302,14 +304,14 @@
             // textoToolStripMenuItem
             // 
             textoToolStripMenuItem.Name = "textoToolStripMenuItem";
-            textoToolStripMenuItem.Size = new Size(180, 22);
+            textoToolStripMenuItem.Size = new Size(102, 22);
             textoToolStripMenuItem.Text = "Texto";
             textoToolStripMenuItem.Click += textoToolStripMenuItem_Click;
             // 
             // paísToolStripMenuItem
             // 
             paísToolStripMenuItem.Name = "paísToolStripMenuItem";
-            paísToolStripMenuItem.Size = new Size(180, 22);
+            paísToolStripMenuItem.Size = new Size(102, 22);
             paísToolStripMenuItem.Text = "País";
             paísToolStripMenuItem.Click += paísToolStripMenuItem_Click;
             // 

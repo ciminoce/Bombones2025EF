@@ -1,4 +1,6 @@
-﻿using Bombones2025.DatosSql.Interfaces;
+﻿using AutoMapper;
+using Bombones2025.DatosSql.Interfaces;
+using Bombones2025.Entidades.DTOs.Pais;
 using Bombones2025.Entidades.Entidades;
 using Bombones2025.Servicios.Interfaces;
 
@@ -7,14 +9,17 @@ namespace Bombones2025.Servicios.Servicios
     public class PaisServicio : IPaisServicio
     {
         private readonly IPaisRepositorio? _paisRepositorio;
-        public PaisServicio(IPaisRepositorio? paisRepositorio)
+        private readonly IMapper? _mapper;
+        public PaisServicio(IPaisRepositorio? paisRepositorio, IMapper? mapper)
         {
             _paisRepositorio = paisRepositorio;
+            _mapper = mapper;
         }
 
-        public bool Guardar(Pais pais, out List<string> errores)
+        public bool Guardar(PaisEditDto paisDto, out List<string> errores)
         {
             errores = new List<string>();
+            Pais pais = _mapper.Map<Pais>(paisDto);
             if (_paisRepositorio.Existe(pais))
             {
                 errores.Add("País existente!!!");
@@ -50,9 +55,10 @@ namespace Bombones2025.Servicios.Servicios
         }
 
 
-        public List<Pais> GetLista(string? textoFiltro = null)
+        public List<PaisListDto> GetLista(string? textoFiltro = null)
         {
-            return _paisRepositorio.GetLista(textoFiltro);
+            var paises= _paisRepositorio.GetLista(textoFiltro);
+            return _mapper.Map<List<PaisListDto>>(paises);
         }
 
         public bool EstaRelacionado(int paisId)

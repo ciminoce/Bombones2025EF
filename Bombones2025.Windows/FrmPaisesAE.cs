@@ -1,10 +1,11 @@
-﻿using Bombones2025.Entidades.Entidades;
+﻿using Bombones2025.Entidades.DTOs.Pais;
+using Bombones2025.Entidades.Entidades;
 
 namespace Bombones2025.Windows
 {
     public partial class FrmPaisesAE : Form
     {
-        private Pais? pais;
+        private PaisEditDto? pais;
         public FrmPaisesAE()
         {
             InitializeComponent();
@@ -17,7 +18,7 @@ namespace Bombones2025.Windows
                 TxtPais.Text = pais.NombrePais;
             }
         }
-        public Pais? GetPais()
+        public PaisEditDto? GetPais()
         {
             return pais;
         }
@@ -33,7 +34,7 @@ namespace Bombones2025.Windows
             {
                 if (pais is null)
                 {
-                    pais = new Pais();
+                    pais = new PaisEditDto();
 
                 }  
                 pais.NombrePais = TxtPais.Text;
@@ -55,7 +56,7 @@ namespace Bombones2025.Windows
             return valido;
         }
 
-        public void SetPais(Pais pais)
+        public void SetPais(PaisEditDto pais)
         {
             this.pais = pais;
         }
