@@ -40,7 +40,7 @@ namespace Bombones2025.DatosSql.Repositorios
             return pais.PaisId == 0
                 ? _dbContext.Paises.Any(p => p.NombrePais == pais.NombrePais)
                 : _dbContext.Paises.Any(p => p.NombrePais == pais.NombrePais
-                    && p.PaisId == pais.PaisId);
+                    && p.PaisId != pais.PaisId);
         }
 
         public List<Pais> GetLista(string? textoFiltro = null)
