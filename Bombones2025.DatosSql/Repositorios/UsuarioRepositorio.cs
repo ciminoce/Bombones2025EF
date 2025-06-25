@@ -5,11 +5,11 @@ namespace Bombones2025.DatosSql.Repositorios
 {
     public class UsuarioRepositorio : IUsuarioRepositorio
     {
-        private readonly BombonesDbContext? _dbContext;
+        private readonly BombonesDbContext _dbContext;
 
-        public UsuarioRepositorio(BombonesDbContext? dbContext)
+        public UsuarioRepositorio(BombonesDbContext  dbContext)
         {
-            _dbContext = dbContext;
+            _dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
         }
 
 

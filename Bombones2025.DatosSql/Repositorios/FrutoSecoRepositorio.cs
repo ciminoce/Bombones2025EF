@@ -6,11 +6,11 @@ namespace Bombones2025.DatosSql.Repositorios
 {
     public class FrutoSecoRepositorio : IFrutoSecoRepositorio
     {
-        private readonly BombonesDbContext? _dbContext;
+        private readonly BombonesDbContext _dbContext;
 
-        public FrutoSecoRepositorio(BombonesDbContext? dbContext)
+        public FrutoSecoRepositorio(BombonesDbContext dbContext)
         {
-            _dbContext = dbContext;
+            _dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
         }
 
         public void Agregar(FrutoSeco frutoSeco)

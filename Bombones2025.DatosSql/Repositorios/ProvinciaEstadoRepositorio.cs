@@ -10,7 +10,7 @@ namespace Bombones2025.DatosSql.Repositorios
 
         public ProvinciaEstadoRepositorio(BombonesDbContext dbContext)
         {
-            _dbContext = dbContext;
+            _dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
         }
 
         public void Agregar(ProvinciaEstado provinciaEstado)

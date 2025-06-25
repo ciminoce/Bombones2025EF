@@ -6,13 +6,12 @@ namespace Bombones2025.DatosSql.Repositorios
 {
     public class PaisRepositorio : IPaisRepositorio
     {
-        private readonly BombonesDbContext? _dbContext;
+        private readonly BombonesDbContext _dbContext; 
 
-        public PaisRepositorio(BombonesDbContext? dbContext)
+        public PaisRepositorio(BombonesDbContext dbContext)
         {
-            _dbContext = dbContext;
+            _dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
         }
-
         public void Agregar(Pais pais)
         {
             _dbContext.Paises.Add(pais);

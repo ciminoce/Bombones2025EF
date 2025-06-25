@@ -6,11 +6,11 @@ namespace Bombones2025.DatosSql.Repositorios
 {
     public class RellenoRepositorio : IRellenoRepositorio
     {
-        private readonly BombonesDbContext? _dbContext;
+        private readonly BombonesDbContext _dbContext;
 
-        public RellenoRepositorio(BombonesDbContext? dbContext)
+        public RellenoRepositorio(BombonesDbContext dbContext)
         {
-            _dbContext = dbContext;
+            _dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
         }
 
         public void Agregar(Relleno relleno)
