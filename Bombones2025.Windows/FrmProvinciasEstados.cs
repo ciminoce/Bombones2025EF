@@ -1,4 +1,5 @@
-﻿using Bombones2025.Entidades.DTOs.ProvinciaEstado;
+﻿using AutoMapper;
+using Bombones2025.Entidades.DTOs.ProvinciaEstado;
 using Bombones2025.Entidades.Entidades;
 using Bombones2025.Servicios.Interfaces;
 using Bombones2025.Windows.Helpers;
@@ -10,14 +11,16 @@ namespace Bombones2025.Windows
     {
         private readonly IProvinciaEstadoServicio _provinciaServicio;
         private readonly IPaisServicio _paisServicio;
+        private readonly IMapper _mapper;
         private bool filterOn = false;
 
         private List<ProvinciaEstadoListDto>? provincias;
-        public FrmProvinciasEstados(IProvinciaEstadoServicio provinciaServicio, IPaisServicio paisServicio)
+        public FrmProvinciasEstados(IProvinciaEstadoServicio provinciaServicio, IPaisServicio paisServicio, IMapper mapper)
         {
             InitializeComponent();
             _provinciaServicio = provinciaServicio;
             _paisServicio = paisServicio;
+            _mapper = mapper;
         }
 
         private void TsbCerrar_Click(object sender, EventArgs e)
@@ -135,15 +138,18 @@ namespace Bombones2025.Windows
             FrmProvinciaEstadoAE frm = new FrmProvinciaEstadoAE(_paisServicio) { Text = "Agregar Fruto Seco" };
             DialogResult dr = frm.ShowDialog(this);
             if (dr == DialogResult.Cancel) return;
-            ProvinciaEstado? provEstado = frm.GetProvincia();
+            var provEstado = frm.GetProvincia();
             if (provEstado is null) return;
             try
             {
                 if (_provinciaServicio.Guardar(provEstado, out var errores))
                 {
-                    ProvinciaEstado? peAgregado = _provinciaServicio.GetById(provEstado.ProvinciaEstadoId);
+                    //var peAgregadoDto = _provinciaServicio.GetById(provEstado.ProvinciaEstadoId);
+                    var peListDto = _mapper.Map<ProvinciaEstadoListDto>(provEstado);
+                    var paisDto = _paisServicio.GetById(provEstado!.PaisId);
+                    peListDto.NombrePais = paisDto!.NombrePais;
                     DataGridViewRow r = GridHelper.ConstruirFila(dgvDatos);
-                    GridHelper.SetearFila(r, peAgregado!);
+                    GridHelper.SetearFila(r, peListDto!);
                     GridHelper.AgregarFila(r, dgvDatos);
                     MessageBox.Show("Registro Agregado", "Información",
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -169,9 +175,9 @@ namespace Bombones2025.Windows
         {
             if (dgvDatos.SelectedRows.Count == 0) return;
             DataGridViewRow r = dgvDatos.SelectedRows[0];
-            ProvinciaEstado? pe = r.Tag as ProvinciaEstado;
+            var pe = r.Tag as ProvinciaEstadoListDto;
             if (pe is null) return;
-            DialogResult dr = MessageBox.Show($"¿Desea borrar el registro de {pe}?",
+            DialogResult dr = MessageBox.Show($"¿Desea borrar el registro de {pe.NombreProvinciaEstado}?",
                 "Confirmar Baja",
                 MessageBoxButtons.YesNo, MessageBoxIcon.Question,
                 MessageBoxDefaultButton.Button2);
@@ -206,9 +212,9 @@ namespace Bombones2025.Windows
         {
             if (dgvDatos.SelectedRows.Count == 0) return;
             DataGridViewRow r = dgvDatos.SelectedRows[0];
-            ProvinciaEstado? pe = r.Tag as ProvinciaEstado;
+            var pe = r.Tag as ProvinciaEstadoListDto;
             if (pe is null) return;
-            ProvinciaEstado? peEditar = pe.Clonar();
+            var peEditar = _provinciaServicio.GetById(pe.ProvinciaEstadoId);
             if (peEditar is null) return;
             FrmProvinciaEstadoAE frm = new FrmProvinciaEstadoAE(_paisServicio) { Text = "Editar Fruto Seco" };
             frm.SetProvincia(peEditar);
@@ -220,8 +226,10 @@ namespace Bombones2025.Windows
             {
                 if (_provinciaServicio.Guardar(peEditar, out var errores))
                 {
-                    ProvinciaEstado? peEditado = _provinciaServicio.GetById(peEditar.ProvinciaEstadoId);
-                    GridHelper.SetearFila(r, peEditado!);
+                    var peEditadoDto = _mapper.Map<ProvinciaEstadoListDto>(peEditar);
+                    var paisDto = _paisServicio.GetById(peEditar.PaisId);
+                    peEditadoDto.NombrePais = paisDto!.NombrePais;
+                    GridHelper.SetearFila(r, peEditadoDto!);
                     MessageBox.Show("Registro Editado", "Información",
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
 

@@ -136,7 +136,7 @@ namespace Bombones2025.Windows
             var r = dgvDatos.SelectedRows[0];
             PaisListDto? paisListDto = (PaisListDto)r.Tag!;
             if (paisListDto == null) return;
-            PaisEditDto? paisEditDto=_paisServicio.GetPorId(paisListDto.PaisId);
+            PaisEditDto? paisEditDto=_paisServicio.GetById(paisListDto.PaisId);
             if (paisEditDto is null) return;
             FrmPaisesAE frm = new FrmPaisesAE() { Text = "Editar País" };
             frm.SetPais(paisEditDto);

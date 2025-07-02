@@ -66,7 +66,7 @@ namespace Bombones2025.Servicios.Servicios
             throw new NotImplementedException();
         }
 
-        public PaisEditDto? GetPorId(int paisId)
+        public PaisEditDto? GetById(int paisId)
         {
             Pais? pais= _paisRepositorio.GetPorId(paisId);
             if (pais is null) return null;

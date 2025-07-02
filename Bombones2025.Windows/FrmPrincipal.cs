@@ -108,13 +108,14 @@ namespace Bombones2025.Windows
         private void BtnProvincias_Click(object sender, EventArgs e)
         {
             IProvinciaEstadoServicio provinciaServicio = AppServices.ServiceProvider!
-    .GetRequiredService<IProvinciaEstadoServicio>();
+                    .GetRequiredService<IProvinciaEstadoServicio>();
             IPaisServicio paisServicio = AppServices.ServiceProvider!
-    .GetRequiredService<IPaisServicio>();
-
+                    .GetRequiredService<IPaisServicio>();
+            IMapper mapper=AppServices.ServiceProvider!.GetRequiredService<IMapper>();
             FrmProvinciasEstados frm = new FrmProvinciasEstados(
                 provinciaServicio,
-                paisServicio) { Text = "Listado de Provincias/Estados" };
+                paisServicio,
+                mapper) { Text = "Listado de Provincias/Estados" };
             frm.ShowDialog(this);
 
         }

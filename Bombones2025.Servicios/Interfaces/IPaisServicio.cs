@@ -9,7 +9,7 @@ namespace Bombones2025.Servicios.Interfaces
         bool Existe(Pais pais);
         List<PaisListDto> GetLista(string? textoFiltro = null);
         bool Guardar(PaisEditDto paisDto, out List<string> errores);
-        PaisEditDto? GetPorId(int paisId);
+        PaisEditDto? GetById(int paisId);
         //bool EstaRelacionado(int paisId);
     }
 }
