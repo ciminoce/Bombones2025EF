@@ -1,4 +1,6 @@
-﻿using Bombones2025.DatosSql.Interfaces;
+﻿using AutoMapper;
+using Bombones2025.DatosSql.Interfaces;
+using Bombones2025.Entidades.DTOs.Relleno;
 using Bombones2025.Entidades.Entidades;
 using Bombones2025.Servicios.Interfaces;
 
@@ -6,10 +8,12 @@ namespace Bombones2025.Servicios.Servicios
 {
     public class RellenoServicio : IRellenoServicio
     {
-        private readonly IRellenoRepositorio? _rellenoRepositorio;
-        public RellenoServicio(IRellenoRepositorio? rellenoRepositorio)
+        private readonly IRellenoRepositorio _rellenoRepositorio;
+        private readonly IMapper _mapper;
+        public RellenoServicio(IRellenoRepositorio rellenoRepositorio, IMapper mapper)
         {
             _rellenoRepositorio = rellenoRepositorio;
+            _mapper = mapper;
         }
 
         public bool Existe(Relleno relleno)
@@ -17,9 +21,10 @@ namespace Bombones2025.Servicios.Servicios
             return _rellenoRepositorio.Existe(relleno);
         }
 
-        public List<Relleno> GetLista(string? textoFiltro=null)
+        public List<RellenoListDto> GetLista(string? textoFiltro=null)
         {
-            return _rellenoRepositorio.GetLista(textoFiltro);
+            var rellenos= _rellenoRepositorio.GetLista(textoFiltro);
+            return _mapper.Map<List<RellenoListDto>>(rellenos);
         }
 
 
@@ -30,9 +35,10 @@ namespace Bombones2025.Servicios.Servicios
             return true;
         }
 
-        public bool Guardar(Relleno relleno, out List<string> errores)
+        public bool Guardar(RellenoEditDto rellenoDto, out List<string> errores)
         {
             errores = new List<string>();
+            Relleno relleno = _mapper.Map<Relleno>(rellenoDto);
             if (_rellenoRepositorio.Existe(relleno))
             {
                 errores.Add("País existente!!!");
@@ -41,6 +47,7 @@ namespace Bombones2025.Servicios.Servicios
             if (relleno.RellenoId==0)
             {
                 _rellenoRepositorio.Agregar(relleno);
+                rellenoDto.RellenoId=relleno.RellenoId;
                 return true;
 
             }

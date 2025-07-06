@@ -1,4 +1,6 @@
-﻿using Bombones2025.Entidades.Entidades;
+﻿using AutoMapper;
+using Bombones2025.Entidades.DTOs.Relleno;
+using Bombones2025.Entidades.Entidades;
 using Bombones2025.Servicios.Interfaces;
 using Bombones2025.Windows.Helpers;
 
@@ -7,11 +9,13 @@ namespace Bombones2025.Windows
     public partial class FrmRellenos : Form
     {
         private readonly IRellenoServicio _servicio = null!;
-        private List<Relleno> lista = null!;
-        public FrmRellenos(IRellenoServicio servicio)
+        private readonly IMapper _mapper;
+        private List<RellenoListDto> lista = null!;
+        public FrmRellenos(IRellenoServicio servicio, IMapper mapper)
         {
             InitializeComponent();
             _servicio = servicio;
+            _mapper = mapper;
         }
 
         private void FrmRellenos_Load(object sender, EventArgs e)
@@ -31,7 +35,7 @@ namespace Bombones2025.Windows
         private void MostrarDatosEnGrilla()
         {
             dgvDatos.Rows.Clear();
-            foreach (Relleno relleno in lista)
+            foreach (var relleno in lista)
             {
                 DataGridViewRow r = GridHelper.ConstruirFila(dgvDatos);
                 GridHelper.SetearFila(r, relleno);
@@ -50,14 +54,15 @@ namespace Bombones2025.Windows
             FrmRellenosAE frm = new FrmRellenosAE() { Text = "Agregar Relleno" };
             DialogResult dr = frm.ShowDialog(this);
             if (dr == DialogResult.Cancel) return;
-            Relleno? relleno = frm.GetRelleno();
-            if (relleno is null) return;
+            var rellenoDto = frm.GetRelleno();
+            if (rellenoDto is null) return;
             try
             {
-                if (_servicio.Guardar(relleno, out var errores))
+                if (_servicio.Guardar(rellenoDto, out var errores))
                 {
+                    var rellenoListDto=_mapper.Map<RellenoListDto>(rellenoDto);
                     DataGridViewRow r = GridHelper.ConstruirFila(dgvDatos);
-                    GridHelper.SetearFila(r, relleno);
+                    GridHelper.SetearFila(r, rellenoListDto);
                     GridHelper.AgregarFila(r, dgvDatos);
                     MessageBox.Show("Registro Agregado", "Información",
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -82,9 +87,9 @@ namespace Bombones2025.Windows
         {
             if (dgvDatos.SelectedRows.Count == 0) return;
             DataGridViewRow r = dgvDatos.SelectedRows[0];
-            Relleno? relleno = r.Tag as Relleno;
+            var relleno = r.Tag as RellenoListDto;
             if (relleno is null) return;
-            DialogResult dr = MessageBox.Show($"¿Desea borrar el registro de {relleno}?",
+            DialogResult dr = MessageBox.Show($"¿Desea borrar el registro de {relleno.Descripcion}?",
                 "Confirmar Baja",
                 MessageBoxButtons.YesNo, MessageBoxIcon.Question,
                 MessageBoxDefaultButton.Button2);
@@ -118,9 +123,9 @@ namespace Bombones2025.Windows
         {
             if (dgvDatos.SelectedRows.Count == 0) return;
             DataGridViewRow r = dgvDatos.SelectedRows[0];
-            Relleno? relleno = r.Tag as Relleno;
-            if (relleno is null) return;
-            Relleno? rellenoEditar = relleno.Clonar();
+            var rellenoDto = r.Tag as RellenoListDto;
+            if (rellenoDto is null) return;
+            var rellenoEditar = _mapper.Map<RellenoEditDto>(rellenoDto);
             FrmRellenosAE frm = new FrmRellenosAE() { Text = "Editar Relleno" };
             frm.SetRelleno(rellenoEditar);
             DialogResult dr = frm.ShowDialog(this);
@@ -131,7 +136,8 @@ namespace Bombones2025.Windows
             {
                 if (_servicio.Guardar(rellenoEditar, out var errores))
                 {
-                    GridHelper.SetearFila(r, rellenoEditar);
+                    rellenoDto = _mapper.Map<RellenoListDto>(rellenoEditar); ;
+                    GridHelper.SetearFila(r, rellenoDto);
                     MessageBox.Show("Registro Editado", "Información",
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
 

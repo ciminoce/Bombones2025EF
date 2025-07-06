@@ -2,6 +2,7 @@
 using Bombones2025.Entidades.DTOs.FrutoSeco;
 using Bombones2025.Entidades.DTOs.Pais;
 using Bombones2025.Entidades.DTOs.ProvinciaEstado;
+using Bombones2025.Entidades.DTOs.Relleno;
 using Bombones2025.Entidades.Entidades;
 
 namespace Bombones2025.Windows.Helpers
@@ -46,9 +47,9 @@ namespace Bombones2025.Windows.Helpers
                     r.Cells[0].Value=paisDto.PaisId;
                     r.Cells[1].Value = paisDto.NombrePais;
                     break;
-                case Relleno relleno:
-                    r.Cells[0].Value = relleno.RellenoId;
-                    r.Cells[1].Value = relleno.Descripcion;
+                case RellenoListDto rellenoDto:
+                    r.Cells[0].Value = rellenoDto.RellenoId;
+                    r.Cells[1].Value = rellenoDto.Descripcion;
                     break;
                 case FrutoSecoListDto frutoDto:
                     r.Cells[0].Value = frutoDto.FrutoSecoId;

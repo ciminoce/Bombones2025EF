@@ -64,7 +64,10 @@ namespace Bombones2025.Windows
             {
                 IRellenoServicio servicio = AppServices.ServiceProvider!
                     .GetRequiredService<IRellenoServicio>();
-                FrmRellenos frm = new FrmRellenos(servicio) { Text = "Listado de Rellenos" };
+                IMapper mapper = AppServices.ServiceProvider!
+                    .GetRequiredService<IMapper>();
+
+                FrmRellenos frm = new FrmRellenos(servicio, mapper) { Text = "Listado de Rellenos" };
                 frm.ShowDialog(this);
 
             }

@@ -3,6 +3,7 @@ using Bombones2025.Entidades.DTOs.Chocolate;
 using Bombones2025.Entidades.DTOs.FrutoSeco;
 using Bombones2025.Entidades.DTOs.Pais;
 using Bombones2025.Entidades.DTOs.ProvinciaEstado;
+using Bombones2025.Entidades.DTOs.Relleno;
 using Bombones2025.Entidades.Entidades;
 
 namespace Bombones2025.Windows.Mappings
@@ -15,6 +16,15 @@ namespace Bombones2025.Windows.Mappings
             LoadProvinciaEstadoMapping();
             LoadFrutoSecoMapping();
             LoadChocolateMapping();
+            LoadRellenoMapping();
+
+        }
+
+        private void LoadRellenoMapping()
+        {
+            CreateMap<Relleno, RellenoListDto>();
+            CreateMap<Relleno, RellenoEditDto>().ReverseMap();
+            CreateMap<RellenoEditDto, RellenoListDto>().ReverseMap();
         }
 
         private void LoadChocolateMapping()

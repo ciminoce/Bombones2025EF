@@ -1,13 +1,5 @@
-﻿using Bombones2025.Entidades.Entidades;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using Bombones2025.Entidades.DTOs.Relleno;
+using Bombones2025.Entidades.Entidades;
 
 namespace Bombones2025.Windows
 {
@@ -17,7 +9,7 @@ namespace Bombones2025.Windows
         {
             InitializeComponent();
         }
-        private Relleno? relleno;
+        private RellenoEditDto? relleno;
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
@@ -26,7 +18,7 @@ namespace Bombones2025.Windows
                 TxtRelleno.Text = relleno.Descripcion;
             }
         }
-        public Relleno? GetRelleno()
+        public RellenoEditDto? GetRelleno()
         {
             return relleno;
         }
@@ -37,7 +29,7 @@ namespace Bombones2025.Windows
             {
                 if (relleno is null)
                 {
-                    relleno = new Relleno();
+                    relleno = new RellenoEditDto();
                 }
                 relleno.Descripcion = TxtRelleno.Text.Trim();
                 DialogResult = DialogResult.OK;
@@ -61,7 +53,7 @@ namespace Bombones2025.Windows
             DialogResult = DialogResult.Cancel;
         }
 
-        public void SetRelleno(Relleno relleno)
+        public void SetRelleno(RellenoEditDto relleno)
         {
             this.relleno = relleno;
         }

@@ -1,4 +1,5 @@
-﻿using Bombones2025.Entidades.Entidades;
+﻿using Bombones2025.Entidades.DTOs.Relleno;
+using Bombones2025.Entidades.Entidades;
 
 namespace Bombones2025.Servicios.Interfaces
 {
@@ -6,7 +7,7 @@ namespace Bombones2025.Servicios.Interfaces
     {
         bool Borrar(int rellenoId, out List<string> errores);
         bool Existe(Relleno relleno);
-        List<Relleno> GetLista(string? textoFiltro = null);
-        bool Guardar(Relleno relleno, out List<string> errores);
+        List<RellenoListDto> GetLista(string? textoFiltro = null);
+        bool Guardar(RellenoEditDto rellenoDto, out List<string> errores);
     }
 }
