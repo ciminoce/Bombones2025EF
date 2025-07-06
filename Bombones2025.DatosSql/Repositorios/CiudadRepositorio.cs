@@ -14,12 +14,16 @@ namespace Bombones2025.DatosSql.Repositorios
 
         public void Agregar(Ciudad ciudad)
         {
-            throw new NotImplementedException();
+            _dbContext.Ciudades.Add(ciudad);
         }
 
         public void Borrar(int ciudadId)
         {
-            throw new NotImplementedException();
+            var ciudadInDb=GetById(ciudadId);
+            if (ciudadInDb is not null)
+            {
+                _dbContext.Ciudades.Remove(ciudadInDb);
+            }
         }
 
         public void Editar(Ciudad ciudad)
@@ -34,7 +38,7 @@ namespace Bombones2025.DatosSql.Repositorios
 
         public Ciudad GetById(int ciudadId)
         {
-            throw new NotImplementedException();
+
         }
 
         public List<Ciudad> GetLista()

@@ -28,9 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
             splitContainer1 = new SplitContainer();
             dgvDatos = new DataGridView();
+            colId = new DataGridViewTextBoxColumn();
+            colCiudad = new DataGridViewTextBoxColumn();
+            colProvinciaEstado = new DataGridViewTextBoxColumn();
+            colPais = new DataGridViewTextBoxColumn();
             TxtCantidadPaginas = new TextBox();
             CboPaginas = new ComboBox();
             label2 = new Label();
@@ -53,10 +57,6 @@
             textoToolStripMenuItem = new ToolStripMenuItem();
             paísToolStripMenuItem = new ToolStripMenuItem();
             provinciaEstadoToolStripMenuItem = new ToolStripMenuItem();
-            colId = new DataGridViewTextBoxColumn();
-            colCiudad = new DataGridViewTextBoxColumn();
-            colProvinciaEstado = new DataGridViewTextBoxColumn();
-            colPais = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
@@ -94,8 +94,8 @@
             // 
             dgvDatos.AllowUserToAddRows = false;
             dgvDatos.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle1.BackColor = Color.FromArgb(224, 224, 224);
-            dgvDatos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle6.BackColor = Color.FromArgb(224, 224, 224);
+            dgvDatos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle6;
             dgvDatos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvDatos.Columns.AddRange(new DataGridViewColumn[] { colId, colCiudad, colProvinciaEstado, colPais });
             dgvDatos.Dock = DockStyle.Fill;
@@ -106,6 +106,34 @@
             dgvDatos.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvDatos.Size = new Size(800, 444);
             dgvDatos.TabIndex = 2;
+            // 
+            // colId
+            // 
+            colId.HeaderText = "Id";
+            colId.Name = "colId";
+            colId.ReadOnly = true;
+            colId.Visible = false;
+            // 
+            // colCiudad
+            // 
+            colCiudad.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            colCiudad.HeaderText = "Ciudad";
+            colCiudad.Name = "colCiudad";
+            colCiudad.ReadOnly = true;
+            // 
+            // colProvinciaEstado
+            // 
+            colProvinciaEstado.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            colProvinciaEstado.HeaderText = "Provincia/Estado";
+            colProvinciaEstado.Name = "colProvinciaEstado";
+            colProvinciaEstado.ReadOnly = true;
+            // 
+            // colPais
+            // 
+            colPais.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            colPais.HeaderText = "País";
+            colPais.Name = "colPais";
+            colPais.ReadOnly = true;
             // 
             // TxtCantidadPaginas
             // 
@@ -191,6 +219,7 @@
             TsbNuevo.Size = new Size(46, 59);
             TsbNuevo.Text = "Nuevo";
             TsbNuevo.TextImageRelation = TextImageRelation.ImageAboveText;
+            TsbNuevo.Click += TsbNuevo_Click;
             // 
             // TsbBorrar
             // 
@@ -201,6 +230,7 @@
             TsbBorrar.Size = new Size(44, 59);
             TsbBorrar.Text = "Borrar";
             TsbBorrar.TextImageRelation = TextImageRelation.ImageAboveText;
+            TsbBorrar.Click += TsbBorrar_Click;
             // 
             // TsbEditar
             // 
@@ -211,6 +241,7 @@
             TsbEditar.Size = new Size(44, 59);
             TsbEditar.Text = "Editar";
             TsbEditar.TextImageRelation = TextImageRelation.ImageAboveText;
+            TsbEditar.Click += TsbEditar_Click;
             // 
             // toolStripSeparator1
             // 
@@ -226,6 +257,7 @@
             TsbActualizar.Size = new Size(63, 59);
             TsbActualizar.Text = "Actualizar";
             TsbActualizar.TextImageRelation = TextImageRelation.ImageAboveText;
+            TsbActualizar.Click += TsbActualizar_Click;
             // 
             // toolStripSeparator2
             // 
@@ -256,6 +288,7 @@
             TsbCerrar.Size = new Size(44, 59);
             TsbCerrar.Text = "Cerrar";
             TsbCerrar.TextImageRelation = TextImageRelation.ImageAboveText;
+            TsbCerrar.Click += TsbCerrar_Click;
             // 
             // toolStrip1
             // 
@@ -280,48 +313,20 @@
             // textoToolStripMenuItem
             // 
             textoToolStripMenuItem.Name = "textoToolStripMenuItem";
-            textoToolStripMenuItem.Size = new Size(180, 22);
+            textoToolStripMenuItem.Size = new Size(163, 22);
             textoToolStripMenuItem.Text = "Texto";
             // 
             // paísToolStripMenuItem
             // 
             paísToolStripMenuItem.Name = "paísToolStripMenuItem";
-            paísToolStripMenuItem.Size = new Size(180, 22);
+            paísToolStripMenuItem.Size = new Size(163, 22);
             paísToolStripMenuItem.Text = "País";
             // 
             // provinciaEstadoToolStripMenuItem
             // 
             provinciaEstadoToolStripMenuItem.Name = "provinciaEstadoToolStripMenuItem";
-            provinciaEstadoToolStripMenuItem.Size = new Size(180, 22);
+            provinciaEstadoToolStripMenuItem.Size = new Size(163, 22);
             provinciaEstadoToolStripMenuItem.Text = "Provincia/Estado";
-            // 
-            // colId
-            // 
-            colId.HeaderText = "Id";
-            colId.Name = "colId";
-            colId.ReadOnly = true;
-            colId.Visible = false;
-            // 
-            // colCiudad
-            // 
-            colCiudad.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            colCiudad.HeaderText = "Ciudad";
-            colCiudad.Name = "colCiudad";
-            colCiudad.ReadOnly = true;
-            // 
-            // colProvinciaEstado
-            // 
-            colProvinciaEstado.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            colProvinciaEstado.HeaderText = "Provincia/Estado";
-            colProvinciaEstado.Name = "colProvinciaEstado";
-            colProvinciaEstado.ReadOnly = true;
-            // 
-            // colPais
-            // 
-            colPais.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            colPais.HeaderText = "País";
-            colPais.Name = "colPais";
-            colPais.ReadOnly = true;
             // 
             // FrmCiudades
             // 
@@ -333,6 +338,7 @@
             Name = "FrmCiudades";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Ciudades";
+            Load += FrmCiudades_Load;
             splitContainer1.Panel1.ResumeLayout(false);
             splitContainer1.Panel2.ResumeLayout(false);
             splitContainer1.Panel2.PerformLayout();

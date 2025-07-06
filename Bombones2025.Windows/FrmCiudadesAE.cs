@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Bombones2025.Entidades.DTOs.Ciudad;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,9 +13,15 @@ namespace Bombones2025.Windows
 {
     public partial class FrmCiudadesAE : Form
     {
-        public FrmCiudadesAE()
+        private CiudadEditDto? ciudadDto;
+        public FrmCiudadesAE(Servicios.Interfaces.ICiudadServicio ciudadServicio)
         {
             InitializeComponent();
+        }
+
+        public CiudadEditDto GetCiudad()
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -19,6 +19,7 @@ namespace Bombones2025.DatosSql
 
         public DbSet<ProvinciaEstado> ProvinciasEstados { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }
+        public DbSet<Ciudad> Ciudades { get; set; }
 
     }
 }
