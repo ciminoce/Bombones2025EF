@@ -1,4 +1,6 @@
-﻿using Bombones2025.Entidades.DTOs.Pais;
+﻿using Bombones2025.Entidades.DTOs.Chocolate;
+using Bombones2025.Entidades.DTOs.FrutoSeco;
+using Bombones2025.Entidades.DTOs.Pais;
 using Bombones2025.Entidades.DTOs.ProvinciaEstado;
 using Bombones2025.Entidades.Entidades;
 
@@ -36,21 +38,21 @@ namespace Bombones2025.Windows.Helpers
         {
             switch (obj)
             {
-                case Chocolate chocolate:
-                    r.Cells[0].Value = chocolate.ChocolateId;
-                    r.Cells[1].Value = chocolate.Descripcion;
+                case ChocolateListDto chocolateDto:
+                    r.Cells[0].Value = chocolateDto.ChocolateId;
+                    r.Cells[1].Value = chocolateDto.Descripcion;
                     break;
-                case PaisListDto pais:
-                    r.Cells[0].Value=pais.PaisId;
-                    r.Cells[1].Value = pais.NombrePais;
+                case PaisListDto paisDto:
+                    r.Cells[0].Value=paisDto.PaisId;
+                    r.Cells[1].Value = paisDto.NombrePais;
                     break;
                 case Relleno relleno:
                     r.Cells[0].Value = relleno.RellenoId;
                     r.Cells[1].Value = relleno.Descripcion;
                     break;
-                case FrutoSecoListDto fruto:
-                    r.Cells[0].Value = fruto.FrutoSecoId;
-                    r.Cells[1].Value = fruto.Descripcion;
+                case FrutoSecoListDto frutoDto:
+                    r.Cells[0].Value = frutoDto.FrutoSecoId;
+                    r.Cells[1].Value = frutoDto.Descripcion;
                     break;
                 case ProvinciaEstadoListDto provinciaDto:
                     r.Cells[0].Value = provinciaDto.ProvinciaEstadoId;

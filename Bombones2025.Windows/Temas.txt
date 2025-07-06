@@ -1,0 +1,2 @@
+﻿Agregar registro ==> modificar registro
+Modificar registro

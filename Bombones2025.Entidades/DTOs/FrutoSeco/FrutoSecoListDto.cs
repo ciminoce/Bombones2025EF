@@ -1,4 +1,4 @@
-﻿namespace Bombones2025.Entidades.DTOs.Pais
+﻿namespace Bombones2025.Entidades.DTOs.FrutoSeco
 {
     public class FrutoSecoListDto
     {

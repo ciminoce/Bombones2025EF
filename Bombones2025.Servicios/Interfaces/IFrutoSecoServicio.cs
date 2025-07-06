@@ -1,4 +1,4 @@
-﻿using Bombones2025.Entidades.DTOs.Pais;
+﻿using Bombones2025.Entidades.DTOs.FrutoSeco;
 using Bombones2025.Entidades.Entidades;
 
 namespace Bombones2025.Servicios.Interfaces

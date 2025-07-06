@@ -1,4 +1,5 @@
-﻿using Bombones2025.Entidades.Entidades;
+﻿using Bombones2025.Entidades.DTOs.Chocolate;
+using Bombones2025.Entidades.Entidades;
 
 namespace Bombones2025.Windows
 {
@@ -8,7 +9,7 @@ namespace Bombones2025.Windows
         {
             InitializeComponent();
         }
-        private Chocolate? chocolate;
+        private ChocolateEditDto? chocolate;
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
@@ -17,7 +18,7 @@ namespace Bombones2025.Windows
                 TxtChocolate.Text = chocolate.Descripcion;
             }
         }
-        public Chocolate? GetChocolate()
+        public ChocolateEditDto? GetChocolate()
         {
             return chocolate;
         }
@@ -28,7 +29,7 @@ namespace Bombones2025.Windows
             {
                 if (chocolate is null)
                 {
-                    chocolate = new Chocolate();
+                    chocolate = new ChocolateEditDto();
                 }
                 chocolate.Descripcion = TxtChocolate.Text.Trim();
                 DialogResult = DialogResult.OK;
@@ -52,7 +53,7 @@ namespace Bombones2025.Windows
             DialogResult = DialogResult.Cancel;
         }
 
-        public void SetChocolate(Chocolate chocolate)
+        public void SetChocolate(ChocolateEditDto chocolate)
         {
             this.chocolate = chocolate;
         }

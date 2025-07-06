@@ -1,19 +1,24 @@
-﻿using Bombones2025.DatosSql.Interfaces;
+﻿using AutoMapper;
+using Bombones2025.DatosSql.Interfaces;
+using Bombones2025.Entidades.DTOs.Chocolate;
 using Bombones2025.Entidades.Entidades;
 using Bombones2025.Servicios.Interfaces;
+using System.ComponentModel.DataAnnotations;
 
 namespace Bombones2025.Servicios.Servicios
 {
     public class ChocolateServicio : IChocolateServicio
     {
         private readonly IChocolateRepositorio? _chocolateRepositorio;
-        public ChocolateServicio(IChocolateRepositorio? chocolateRepositorio)
+        private readonly IMapper _mapper;
+        public ChocolateServicio(IChocolateRepositorio? chocolateRepositorio, IMapper mapper)
         {
-            if(chocolateRepositorio == null)
+            if (chocolateRepositorio == null)
             {
                 throw new InvalidOperationException("El repositorio de chocolates no ha sido inicializado.");
             }
             _chocolateRepositorio = chocolateRepositorio;
+            _mapper = mapper;
         }
 
         public bool Existe(Chocolate chocolate)
@@ -21,9 +26,10 @@ namespace Bombones2025.Servicios.Servicios
             return _chocolateRepositorio!.Existe(chocolate);
         }
 
-        public List<Chocolate> GetLista(string? textoFiltro = null)
+        public List<ChocolateListDto> GetLista(string? textoFiltro = null)
         {
-            return _chocolateRepositorio!.GetLista(textoFiltro);
+            var chocolates= _chocolateRepositorio!.GetLista(textoFiltro);
+            return _mapper.Map<List<ChocolateListDto>>(chocolates);
         }
 
         public bool Borrar(int chocolateId, out List<string> errores)
@@ -33,9 +39,10 @@ namespace Bombones2025.Servicios.Servicios
             return true;
         }
 
-        public bool Guardar(Chocolate chocolate, out List<string> errores)
+        public bool Guardar(ChocolateEditDto chocolateDto, out List<string> errores)
         {
             errores=new List<string>();
+            Chocolate chocolate = _mapper.Map<Chocolate>(chocolateDto);
             if (_chocolateRepositorio!.Existe(chocolate))
             {
                 errores.Add("Chocolate existente!!!");
@@ -44,6 +51,7 @@ namespace Bombones2025.Servicios.Servicios
             if (chocolate.ChocolateId == 0)
             {
                 _chocolateRepositorio.Agregar(chocolate);
+                chocolateDto.ChocolateId=chocolate.ChocolateId;
                 return true;
 
             }

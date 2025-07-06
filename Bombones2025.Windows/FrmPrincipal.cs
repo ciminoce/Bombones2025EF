@@ -84,7 +84,10 @@ namespace Bombones2025.Windows
             {
                 IChocolateServicio servicio = AppServices.ServiceProvider!
                     .GetRequiredService<IChocolateServicio>();
-                FrmChocolates frm = new FrmChocolates(servicio) { Text = "Listado de Chocolates" };
+                IMapper mapper = AppServices.ServiceProvider!
+                    .GetRequiredService<IMapper>();
+
+                FrmChocolates frm = new FrmChocolates(servicio, mapper) { Text = "Listado de Chocolates" };
                 frm.ShowDialog(this);
 
             }

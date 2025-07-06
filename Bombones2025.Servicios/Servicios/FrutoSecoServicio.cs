@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Bombones2025.DatosSql.Interfaces;
-using Bombones2025.Entidades.DTOs.Pais;
+using Bombones2025.Entidades.DTOs.FrutoSeco;
 using Bombones2025.Entidades.Entidades;
 using Bombones2025.Servicios.Interfaces;
 
