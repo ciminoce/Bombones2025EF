@@ -41,7 +41,10 @@ namespace Bombones2025.Windows
             {
                 IFrutoSecoServicio servicio = AppServices.ServiceProvider!
                     .GetRequiredService<IFrutoSecoServicio>();
-                FrmFrutosSecos frm = new FrmFrutosSecos(servicio) { Text = "Listado de Frutos Secos" };
+                IMapper mapper = AppServices.ServiceProvider!
+                    .GetRequiredService<IMapper>();
+
+                FrmFrutosSecos frm = new FrmFrutosSecos(servicio,mapper) { Text = "Listado de Frutos Secos" };
                 frm.ShowDialog(this);
 
             }

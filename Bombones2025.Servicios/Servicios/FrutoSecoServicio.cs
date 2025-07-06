@@ -1,4 +1,6 @@
-﻿using Bombones2025.DatosSql.Interfaces;
+﻿using AutoMapper;
+using Bombones2025.DatosSql.Interfaces;
+using Bombones2025.Entidades.DTOs.Pais;
 using Bombones2025.Entidades.Entidades;
 using Bombones2025.Servicios.Interfaces;
 
@@ -6,10 +8,12 @@ namespace Bombones2025.Servicios.Servicios
 {
     public class FrutoSecoServicio : IFrutoSecoServicio
     {
-        private readonly IFrutoSecoRepositorio? _frutoRepositorio;
-        public FrutoSecoServicio(IFrutoSecoRepositorio? frutoRepositorio)
+        private readonly IFrutoSecoRepositorio _frutoRepositorio;
+        private readonly IMapper _mapper;
+        public FrutoSecoServicio(IFrutoSecoRepositorio frutoRepositorio, IMapper mapper)
         {
             _frutoRepositorio = frutoRepositorio;
+            _mapper = mapper;
         }
 
         public bool Existe(FrutoSeco fruto)
@@ -17,14 +21,16 @@ namespace Bombones2025.Servicios.Servicios
             return _frutoRepositorio.Existe(fruto);
         }
 
-        public List<FrutoSeco> GetLista(string? textoFiltro = null)
+        public List<FrutoSecoListDto> GetLista(string? textoFiltro = null)
         {
-            return _frutoRepositorio.GetLista(textoFiltro);
+            var frutos= _frutoRepositorio.GetLista(textoFiltro);
+            return _mapper.Map<List<FrutoSecoListDto>>(frutos);
         }
 
-        public bool Guardar(FrutoSeco fruto, out List<string> errores)
+        public bool Guardar(FrutoSecoEditDto frutoDto, out List<string> errores)
         {
             errores = new List<string>();
+            var fruto = _mapper.Map<FrutoSeco>(frutoDto);
             if (_frutoRepositorio.Existe(fruto))
             {
                 errores.Add("Fruto existente!!!");
@@ -33,6 +39,7 @@ namespace Bombones2025.Servicios.Servicios
             if (fruto.FrutoSecoId==0)
             {
                 _frutoRepositorio.Agregar(fruto);
+                frutoDto.FrutoSecoId = fruto.FrutoSecoId;
                 return true;
 
             }

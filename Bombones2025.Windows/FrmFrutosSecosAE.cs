@@ -1,10 +1,11 @@
-﻿using Bombones2025.Entidades.Entidades;
+﻿using Bombones2025.Entidades.DTOs.Pais;
+using Bombones2025.Entidades.Entidades;
 
 namespace Bombones2025.Windows
 {
     public partial class FrmFrutosSecosAE : Form
     {
-        private FrutoSeco? fruto;
+        private FrutoSecoEditDto? frutoDto;
         public FrmFrutosSecosAE()
         {
             InitializeComponent();
@@ -12,25 +13,25 @@ namespace Bombones2025.Windows
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
-            if (fruto is not null)
+            if (frutoDto is not null)
             {
-                TxtFrutoSeco.Text = fruto.Descripcion;
+                TxtFrutoSeco.Text = frutoDto.Descripcion;
             }
         }
-        public FrutoSeco? GetFrutoSeco()
+        public FrutoSecoEditDto? GetFrutoSeco()
         {
-            return fruto;
+            return frutoDto;
         }
 
         private void BtnOK_Click(object sender, EventArgs e)
         {
             if (ValidarDatos())
             {
-                if (fruto is null)
+                if (frutoDto is null)
                 {
-                    fruto = new FrutoSeco();
+                    frutoDto = new FrutoSecoEditDto();
                 }
-                fruto.Descripcion = TxtFrutoSeco.Text.Trim();
+                frutoDto.Descripcion = TxtFrutoSeco.Text.Trim();
                 DialogResult = DialogResult.OK;
             }
         }
@@ -52,9 +53,9 @@ namespace Bombones2025.Windows
             DialogResult = DialogResult.Cancel;
         }
 
-        public void SetFruto(FrutoSeco fs)
+        public void SetFruto(FrutoSecoEditDto fs)
         {
-            fruto = fs;
+            frutoDto = fs;
         }
     }
 }

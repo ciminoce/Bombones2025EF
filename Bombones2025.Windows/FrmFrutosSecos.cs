@@ -1,4 +1,6 @@
-﻿using Bombones2025.Entidades.Entidades;
+﻿using AutoMapper;
+using Bombones2025.Entidades.DTOs.Pais;
+using Bombones2025.Entidades.Entidades;
 using Bombones2025.Servicios.Interfaces;
 using Bombones2025.Windows.Helpers;
 
@@ -7,11 +9,13 @@ namespace Bombones2025.Windows
     public partial class FrmFrutosSecos : Form
     {
         private readonly IFrutoSecoServicio _servicio = null!;
-        private List<FrutoSeco> lista = null!;
-        public FrmFrutosSecos(IFrutoSecoServicio servicio)
+        private readonly IMapper _mapper;
+        private List<FrutoSecoListDto> lista = null!;
+        public FrmFrutosSecos(IFrutoSecoServicio servicio, IMapper mapper)
         {
             InitializeComponent();
             _servicio = servicio;
+            _mapper = mapper;
         }
 
         private void FrmFrutosSecos_Load(object sender, EventArgs e)
@@ -31,7 +35,7 @@ namespace Bombones2025.Windows
         private void MostrarDatosEnGrilla()
         {
             dgvDatos.Rows.Clear();
-            foreach (FrutoSeco fs in lista)
+            foreach (FrutoSecoListDto fs in lista)
             {
                 DataGridViewRow r = GridHelper.ConstruirFila(dgvDatos);
 
@@ -50,14 +54,15 @@ namespace Bombones2025.Windows
             FrmFrutosSecosAE frm = new FrmFrutosSecosAE() { Text = "Agregar Fruto Seco" };
             DialogResult dr = frm.ShowDialog(this);
             if (dr == DialogResult.Cancel) return;
-            FrutoSeco? fruto = frm.GetFrutoSeco();
-            if (fruto is null) return;
+            var frutoDto = frm.GetFrutoSeco();
+            if (frutoDto is null) return;
             try
             {
-                if(_servicio.Guardar(fruto, out var errores))
+                if(_servicio.Guardar(frutoDto, out var errores))
                 {
+                    FrutoSecoListDto frutoListDto = _mapper.Map<FrutoSecoListDto>(frutoDto);
                     DataGridViewRow r = GridHelper.ConstruirFila(dgvDatos);
-                    GridHelper.SetearFila(r, fruto);
+                    GridHelper.SetearFila(r, frutoListDto);
                     GridHelper.AgregarFila(r,dgvDatos);
                     MessageBox.Show("Registro Agregado", "Información",
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -83,9 +88,9 @@ namespace Bombones2025.Windows
         {
             if (dgvDatos.SelectedRows.Count == 0) return;
             DataGridViewRow r = dgvDatos.SelectedRows[0];
-            FrutoSeco? fs = r.Tag as FrutoSeco;
+            var fs = r.Tag as FrutoSecoListDto;
             if (fs is null) return;
-            DialogResult dr = MessageBox.Show($"¿Desea borrar el registro de {fs}?",
+            DialogResult dr = MessageBox.Show($"¿Desea borrar el registro de {fs.Descripcion}?",
                 "Confirmar Baja",
                 MessageBoxButtons.YesNo, MessageBoxIcon.Question,
                 MessageBoxDefaultButton.Button2);
@@ -120,9 +125,9 @@ namespace Bombones2025.Windows
         {
             if (dgvDatos.SelectedRows.Count == 0) return;
             DataGridViewRow r = dgvDatos.SelectedRows[0];
-            FrutoSeco? fs = r.Tag as FrutoSeco;
+            var fs = r.Tag as FrutoSecoListDto;
             if (fs is null) return;
-            FrutoSeco? fsEditar = fs.Clonar();
+            FrutoSecoEditDto? fsEditar = _mapper.Map<FrutoSecoEditDto>(fs);
             FrmFrutosSecosAE frm = new FrmFrutosSecosAE() { Text = "Editar Fruto Seco" };
             frm.SetFruto(fsEditar);
             DialogResult dr = frm.ShowDialog(this);
@@ -133,7 +138,8 @@ namespace Bombones2025.Windows
             {
                 if (_servicio.Guardar(fsEditar, out var errores))
                 {
-                    GridHelper.SetearFila(r, fsEditar);
+                    FrutoSecoListDto fsListDto=_mapper.Map<FrutoSecoListDto>(fsEditar);
+                    GridHelper.SetearFila(r, fsListDto);
                     MessageBox.Show("Registro Editado", "Información",
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
 

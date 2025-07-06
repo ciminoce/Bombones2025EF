@@ -11,6 +11,14 @@ namespace Bombones2025.Windows.Mappings
         {
             LoadPaisMapping();
             LoadProvinciaEstadoMapping();
+            LoadFrutoSecoMapping();
+        }
+
+        private void LoadFrutoSecoMapping()
+        {
+            CreateMap<FrutoSeco, FrutoSecoListDto>();
+            CreateMap<FrutoSeco, FrutoSecoEditDto>().ReverseMap();
+            CreateMap<FrutoSecoEditDto, FrutoSecoListDto>().ReverseMap();
         }
 
         private void LoadProvinciaEstadoMapping()
@@ -25,7 +33,7 @@ namespace Bombones2025.Windows.Mappings
         {
             CreateMap<Pais, PaisListDto>();
             CreateMap<Pais, PaisEditDto>().ReverseMap();
-            CreateMap<PaisEditDto, PaisListDto>();
+            CreateMap<PaisEditDto, PaisListDto>().ReverseMap();
         }
     }
 }
