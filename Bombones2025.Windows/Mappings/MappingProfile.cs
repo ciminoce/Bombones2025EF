@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Bombones2025.Entidades.DTOs.Chocolate;
+using Bombones2025.Entidades.DTOs.Ciudad;
 using Bombones2025.Entidades.DTOs.FrutoSeco;
 using Bombones2025.Entidades.DTOs.Pais;
 using Bombones2025.Entidades.DTOs.ProvinciaEstado;
@@ -17,7 +18,17 @@ namespace Bombones2025.Windows.Mappings
             LoadFrutoSecoMapping();
             LoadChocolateMapping();
             LoadRellenoMapping();
+            LoadCiudadMapping();
+        }
 
+        private void LoadCiudadMapping()
+        {
+            CreateMap<Ciudad, CiudadListDto>()
+                .ForMember(dest => dest.NombreProvincia,
+                        opt => opt.MapFrom(src => src
+                        .ProvinciaEstado!.NombreProvinciaEstado))
+                .ForMember(dest => dest.NombrePais,
+                        opt => opt.MapFrom(src => src.ProvinciaEstado!.Pais!.NombrePais));
         }
 
         private void LoadRellenoMapping()

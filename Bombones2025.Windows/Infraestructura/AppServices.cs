@@ -30,6 +30,7 @@ namespace Bombones2025.Infraestructura
             services.AddScoped<IFrutoSecoRepositorio, FrutoSecoRepositorio>();
             services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>();
             services.AddScoped<IProvinciaEstadoRepositorio, ProvinciaEstadoRepositorio>();
+            services.AddScoped<ICiudadRepositorio, CiudadRepositorio>();
 
             services.AddScoped<IPaisServicio, PaisServicio>();
             services.AddScoped<IRellenoServicio, RellenoServicio>();
@@ -37,6 +38,7 @@ namespace Bombones2025.Infraestructura
             services.AddScoped<IFrutoSecoServicio, FrutoSecoServicio>();
             services.AddScoped<IUsuarioServicio, UsuarioServicio>();
             services.AddScoped<IProvinciaEstadoServicio, ProvinciaEstadoServicio>();
+            services.AddScoped<ICiudadServicio, CiudadServicio>();
 
             services.AddAutoMapper(typeof(MappingProfile).Assembly);
             _serviceProvider = services.BuildServiceProvider();

@@ -1,4 +1,5 @@
 ﻿using Bombones2025.Entidades.DTOs.Chocolate;
+using Bombones2025.Entidades.DTOs.Ciudad;
 using Bombones2025.Entidades.DTOs.FrutoSeco;
 using Bombones2025.Entidades.DTOs.Pais;
 using Bombones2025.Entidades.DTOs.ProvinciaEstado;
@@ -60,6 +61,13 @@ namespace Bombones2025.Windows.Helpers
                     r.Cells[1].Value = provinciaDto.NombreProvinciaEstado;
                     r.Cells[2].Value = provinciaDto.NombrePais;
                     break;
+                case CiudadListDto ciudadDto:
+                    r.Cells[0].Value = ciudadDto.CiudadId;
+                    r.Cells[1].Value = ciudadDto.NombreCiudad;
+                    r.Cells[2].Value = ciudadDto.NombreProvincia;
+                    r.Cells[3].Value = ciudadDto.NombrePais;
+                    break;
+
             }
 
             r.Tag = obj;

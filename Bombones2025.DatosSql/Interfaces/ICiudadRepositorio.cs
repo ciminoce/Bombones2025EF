@@ -4,11 +4,11 @@ namespace Bombones2025.DatosSql.Interfaces
 {
     public interface ICiudadRepositorio
     {
-        void Agregar(Ciudad ciudad);
-        void Editar(Ciudad ciudad);
-        void Borrar(int ciudadId);
+        //void Agregar(Ciudad ciudad);
+        //void Editar(Ciudad ciudad);
+        //void Borrar(int ciudadId);
+        //Ciudad GetById(int ciudadId);
+        //bool EstaRelacionado(int ciudadId);
         List<Ciudad> GetLista();
-        Ciudad GetById(int ciudadId);
-        bool EstaRelacionado(int ciudadId);
     }
 }

@@ -37,6 +37,7 @@
             LblUsuario = new ToolStripStatusLabel();
             BtnSalir = new Button();
             BtnProvincias = new Button();
+            BtnCiudades = new Button();
             statusStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -122,6 +123,16 @@
             BtnProvincias.UseVisualStyleBackColor = true;
             BtnProvincias.Click += BtnProvincias_Click;
             // 
+            // BtnCiudades
+            // 
+            BtnCiudades.Location = new Point(153, 124);
+            BtnCiudades.Name = "BtnCiudades";
+            BtnCiudades.Size = new Size(87, 54);
+            BtnCiudades.TabIndex = 0;
+            BtnCiudades.Text = "Ciudades";
+            BtnCiudades.UseVisualStyleBackColor = true;
+            BtnCiudades.Click += BtnCiudades_Click;
+            // 
             // FrmPrincipal
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -132,6 +143,7 @@
             Controls.Add(BtnChocolates);
             Controls.Add(BtnRellenos);
             Controls.Add(BtnFrutosSecos);
+            Controls.Add(BtnCiudades);
             Controls.Add(BtnProvincias);
             Controls.Add(BtnPaises);
             Name = "FrmPrincipal";
@@ -153,5 +165,6 @@
         private ToolStripStatusLabel LblUsuario;
         private Button BtnSalir;
         private Button BtnProvincias;
+        private Button BtnCiudades;
     }
 }

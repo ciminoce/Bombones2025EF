@@ -44,7 +44,7 @@ namespace Bombones2025.Windows
                 IMapper mapper = AppServices.ServiceProvider!
                     .GetRequiredService<IMapper>();
 
-                FrmFrutosSecos frm = new FrmFrutosSecos(servicio,mapper) { Text = "Listado de Frutos Secos" };
+                FrmFrutosSecos frm = new FrmFrutosSecos(servicio, mapper) { Text = "Listado de Frutos Secos" };
                 frm.ShowDialog(this);
 
             }
@@ -120,11 +120,32 @@ namespace Bombones2025.Windows
                     .GetRequiredService<IProvinciaEstadoServicio>();
             IPaisServicio paisServicio = AppServices.ServiceProvider!
                     .GetRequiredService<IPaisServicio>();
-            IMapper mapper=AppServices.ServiceProvider!.GetRequiredService<IMapper>();
+            IMapper mapper = AppServices.ServiceProvider!.GetRequiredService<IMapper>();
             FrmProvinciasEstados frm = new FrmProvinciasEstados(
                 provinciaServicio,
                 paisServicio,
-                mapper) { Text = "Listado de Provincias/Estados" };
+                mapper)
+            { Text = "Listado de Provincias/Estados" };
+            frm.ShowDialog(this);
+
+        }
+
+        private void BtnCiudades_Click(object sender, EventArgs e)
+        {
+            //no tenemos registrado el servicio en el inyector!!! joder!!!
+            ICiudadServicio ciudadServicio=AppServices.ServiceProvider!
+                .GetRequiredService<ICiudadServicio>();
+            IProvinciaEstadoServicio provinciaServicio = AppServices.ServiceProvider!
+                .GetRequiredService<IProvinciaEstadoServicio>();
+            IPaisServicio paisServicio = AppServices.ServiceProvider!
+                    .GetRequiredService<IPaisServicio>();
+            IMapper mapper = AppServices.ServiceProvider!.GetRequiredService<IMapper>();
+            FrmCiudades frm = new FrmCiudades(
+                ciudadServicio,
+                provinciaServicio,
+                paisServicio,
+                mapper)
+            { Text = "Listado de Ciudades" };
             frm.ShowDialog(this);
 
         }
