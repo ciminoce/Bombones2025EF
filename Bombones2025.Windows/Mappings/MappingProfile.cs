@@ -29,6 +29,8 @@ namespace Bombones2025.Windows.Mappings
                         .ProvinciaEstado!.NombreProvinciaEstado))
                 .ForMember(dest => dest.NombrePais,
                         opt => opt.MapFrom(src => src.ProvinciaEstado!.Pais!.NombrePais));
+            CreateMap<Ciudad, CiudadEditDto>().ReverseMap();
+            CreateMap<CiudadEditDto, CiudadListDto>();
         }
 
         private void LoadRellenoMapping()

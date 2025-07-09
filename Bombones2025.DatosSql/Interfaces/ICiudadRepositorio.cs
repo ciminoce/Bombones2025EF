@@ -4,7 +4,8 @@ namespace Bombones2025.DatosSql.Interfaces
 {
     public interface ICiudadRepositorio
     {
-        //void Agregar(Ciudad ciudad);
+        void Agregar(Ciudad ciudad);
+        bool Existe(Ciudad ciudad);
         //void Editar(Ciudad ciudad);
         //void Borrar(int ciudadId);
         //Ciudad GetById(int ciudadId);

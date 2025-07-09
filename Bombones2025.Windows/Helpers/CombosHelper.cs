@@ -1,6 +1,5 @@
 ﻿using Bombones2025.Entidades.DTOs.Pais;
 using Bombones2025.Entidades.DTOs.ProvinciaEstado;
-using Bombones2025.Entidades.Entidades;
 using Bombones2025.Servicios.Interfaces;
 
 namespace Bombones2025.Windows.Helpers
@@ -15,7 +14,7 @@ namespace Bombones2025.Windows.Helpers
                 PaisId = 0,
                 NombrePais = "Seleccione País"
             };
-            listaPaises.Insert(0,defaultPais);
+            listaPaises.Insert(0, defaultPais);
             cbo.DataSource = listaPaises;
             cbo.DisplayMember = "NombrePais";
             cbo.ValueMember = "PaisId";

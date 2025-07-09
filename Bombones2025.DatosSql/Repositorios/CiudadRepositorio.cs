@@ -13,6 +13,23 @@ namespace Bombones2025.DatosSql.Repositorios
             _dbContext = dbContext;
         }
 
+        public void Agregar(Ciudad ciudad)
+        {
+            _dbContext.Ciudades.Add(ciudad);
+            _dbContext.SaveChanges();
+        }
+
+        public bool Existe(Ciudad ciudad)
+        {
+            return ciudad.CiudadId == 0 ? _dbContext.Ciudades.Any(
+                    c => c.NombreCiudad == ciudad.NombreCiudad &&
+                    c.ProvinciaEstadoId == ciudad.ProvinciaEstadoId) :
+                    _dbContext.Ciudades.Any(
+                    c => c.NombreCiudad == ciudad.NombreCiudad &&
+                    c.ProvinciaEstadoId == ciudad.ProvinciaEstadoId &&
+                    c.CiudadId != ciudad.CiudadId); 
+        }
+
         public List<Ciudad> GetLista()
         {
             /*

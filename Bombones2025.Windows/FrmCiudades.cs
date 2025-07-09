@@ -50,31 +50,38 @@ namespace Bombones2025.Windows
             if (dr == DialogResult.Cancel) return;
             var ciudadEditDto = frm.GetCiudad();
             if (ciudadEditDto is null) return;
-            //try
-            //{
-            //    if (_ciudadServicio.Guardar(ciudadEditDto, out var errores))
-            //    {
+            try
+            {
+                if (_ciudadServicio.Guardar(ciudadEditDto, out var errores))
+                {
+                    //Tengo que generar un CiudadListDto para mostrarlo en la grilla
+                    CiudadListDto ciudadDto = _mapper.Map<CiudadListDto>(ciudadEditDto);
+                    //Tengo que obtener los datos que me faltan!!!
+                    var provinciaDto = _provinciaServicio.GetById(ciudadEditDto.ProvinciaEstadoId);
+                    ciudadDto.NombreProvincia = provinciaDto.NombreProvinciaEstado;
+                    var paisDto = _paisServicio.GetById(provinciaDto.PaisId);
+                    ciudadDto.NombrePais = paisDto.NombrePais;
+                    //Joya ya tengo todos los datos... ahora lo muestro
+                    DataGridViewRow r = GridHelper.ConstruirFila(dgvDatos);
+                    GridHelper.SetearFila(r, ciudadDto!);
+                    GridHelper.AgregarFila(r, dgvDatos);
+                    MessageBox.Show("Registro Agregado", "Información",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-            //        DataGridViewRow r = GridHelper.ConstruirFila(dgvDatos);
-            //        GridHelper.SetearFila(r, ciudadDto!);
-            //        GridHelper.AgregarFila(r, dgvDatos);
-            //        MessageBox.Show("Registro Agregado", "Información",
-            //            MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
 
-            //    }
+                else
+                {
+                    MessageBox.Show(errores.First(), "Error",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
 
-            //    else
-            //    {
-            //        MessageBox.Show(errores.First(), "Error",
-            //            MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //    }
-            //}
-            //catch (Exception ex)
-            //{
-
-            //    MessageBox.Show(ex.Message, "Error",
-            //        MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //}
+                MessageBox.Show(ex.Message, "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
         }
 

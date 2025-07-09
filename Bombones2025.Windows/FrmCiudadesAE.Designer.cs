@@ -70,6 +70,7 @@
             BtnCancelar.Text = "Cancelar";
             BtnCancelar.TextImageRelation = TextImageRelation.ImageAboveText;
             BtnCancelar.UseVisualStyleBackColor = true;
+            BtnCancelar.Click += BtnCancelar_Click;
             // 
             // BtnOK
             // 
@@ -81,6 +82,7 @@
             BtnOK.Text = "OK";
             BtnOK.TextImageRelation = TextImageRelation.ImageAboveText;
             BtnOK.UseVisualStyleBackColor = true;
+            BtnOK.Click += BtnOK_Click;
             // 
             // TxtCiudad
             // 
@@ -116,6 +118,7 @@
             CboProvEstados.Name = "CboProvEstados";
             CboProvEstados.Size = new Size(342, 23);
             CboProvEstados.TabIndex = 22;
+            CboProvEstados.SelectedIndexChanged += CboProvEstados_SelectedIndexChanged;
             // 
             // errorProvider1
             // 
