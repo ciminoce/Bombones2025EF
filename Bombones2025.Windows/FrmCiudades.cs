@@ -87,79 +87,83 @@ namespace Bombones2025.Windows
 
         private void TsbBorrar_Click(object sender, EventArgs e)
         {
-            //if (dgvDatos.SelectedRows.Count == 0) return;
-            //DataGridViewRow r = dgvDatos.SelectedRows[0];
-            //var pe = r.Tag as ProvinciaEstadoListDto;
-            //if (pe is null) return;
-            //DialogResult dr = MessageBox.Show($"¿Desea borrar el registro de {pe.NombreProvinciaEstado}?",
-            //    "Confirmar Baja",
-            //    MessageBoxButtons.YesNo, MessageBoxIcon.Question,
-            //    MessageBoxDefaultButton.Button2);
-            //if (dr == DialogResult.No) return;
-            //try
-            //{
-            //    if (_provinciaServicio.Borrar(pe.ProvinciaEstadoId, out var errores))
-            //    {
-            //        GridHelper.QuitarFila(r, dgvDatos);
-            //        MessageBox.Show("Registro Eliminado", "Información",
-            //                MessageBoxButtons.OK, MessageBoxIcon.Information);
+            if (dgvDatos.SelectedRows.Count == 0) return;
+            DataGridViewRow r = dgvDatos.SelectedRows[0];
+            var ciudadDto = r.Tag as CiudadListDto;
+            if (ciudadDto is null) return;
+            DialogResult dr = MessageBox.Show($"¿Desea borrar el registro de {ciudadDto.NombreCiudad}?",
+                "Confirmar Baja",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question,
+                MessageBoxDefaultButton.Button2);
+            if (dr == DialogResult.No) return;
+            try
+            {
+                if (_ciudadServicio.Borrar(ciudadDto.CiudadId, out var errores))
+                {
+                    GridHelper.QuitarFila(r, dgvDatos);
+                    MessageBox.Show("Registro Eliminado", "Información",
+                            MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-            //    }
-            //    else
-            //    {
-            //        MessageBox.Show(errores.First(), "Error",
-            //            MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    MessageBox.Show(errores.First(), "Error",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-            //    }
+                }
 
-            //}
-            //catch (Exception ex)
-            //{
+            }
+            catch (Exception ex)
+            {
 
-            //    MessageBox.Show(ex.Message, "Error",
-            //        MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //}
+                MessageBox.Show(ex.Message, "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
         }
 
         private void TsbEditar_Click(object sender, EventArgs e)
         {
-            //if (dgvDatos.SelectedRows.Count == 0) return;
-            //DataGridViewRow r = dgvDatos.SelectedRows[0];
-            //var pe = r.Tag as ProvinciaEstadoListDto;
-            //if (pe is null) return;
-            //var peEditar = _provinciaServicio.GetById(pe.ProvinciaEstadoId);
-            //if (peEditar is null) return;
-            //FrmProvinciaEstadoAE frm = new FrmProvinciaEstadoAE(_paisServicio) { Text = "Editar Fruto Seco" };
-            //frm.SetProvincia(peEditar);
-            //DialogResult dr = frm.ShowDialog(this);
-            //if (dr == DialogResult.Cancel) return;
-            //peEditar = frm.GetProvincia();
-            //if (peEditar is null) return;
-            //try
-            //{
-            //    if (_provinciaServicio.Guardar(peEditar, out var errores))
-            //    {
-            //        var peEditadoDto = _mapper.Map<ProvinciaEstadoListDto>(peEditar);
-            //        var paisDto = _paisServicio.GetById(peEditar.PaisId);
-            //        peEditadoDto.NombrePais = paisDto!.NombrePais;
-            //        GridHelper.SetearFila(r, peEditadoDto!);
-            //        MessageBox.Show("Registro Editado", "Información",
-            //            MessageBoxButtons.OK, MessageBoxIcon.Information);
+            if (dgvDatos.SelectedRows.Count == 0) return;
+            DataGridViewRow r = dgvDatos.SelectedRows[0];
+            var ciudadDto = r.Tag as CiudadListDto;
+            if (ciudadDto is null) return;
+            var ciudadEditar = _ciudadServicio.GetById(ciudadDto.CiudadId);
+            if (ciudadEditar is null) return;
+            FrmCiudadesAE frm = new FrmCiudadesAE(_paisServicio, _provinciaServicio) { Text = "Editar Fruto Seco" };
+            frm.SetCiudad(ciudadEditar);
+            DialogResult dr = frm.ShowDialog(this);
+            if (dr == DialogResult.Cancel) return;
+            ciudadEditar = frm.GetCiudad();
+            if (ciudadEditar is null) return;
+            try
+            {
+                if (_ciudadServicio.Guardar(ciudadEditar, out var errores))
+                {
+                    var ceEditadoDto = _mapper.Map<CiudadListDto>(ciudadEditar);
+                    var provDto=_provinciaServicio.GetById(ciudadEditar.ProvinciaEstadoId);
 
-            //    }
-            //    else
-            //    {
-            //        MessageBox.Show(errores.First(), "Error",
-            //            MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //    }
-            //}
-            //catch (Exception ex)
-            //{
+                    var paisDto = _paisServicio.GetById(provDto!.PaisId);
 
-            //    MessageBox.Show(ex.Message, "Error",
-            //        MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //}
+                    ceEditadoDto.NombrePais = paisDto!.NombrePais;
+                    ceEditadoDto.NombreProvincia = provDto.NombreProvinciaEstado;
+                    GridHelper.SetearFila(r, ceEditadoDto!);
+                    MessageBox.Show("Registro Editado", "Información",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                }
+                else
+                {
+                    MessageBox.Show(errores.First(), "Error",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message, "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
         }
 
@@ -206,7 +210,7 @@ namespace Bombones2025.Windows
             if (textoFiltro == null) return;
             try
             {
-                ciudades = _ciudadServicio.GetLista(null,textoFiltro);
+                ciudades = _ciudadServicio.GetLista(null, textoFiltro);
                 MostrarDatosEnGrilla();
             }
             catch (Exception)

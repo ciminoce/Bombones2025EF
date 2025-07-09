@@ -19,9 +19,29 @@ namespace Bombones2025.Servicios.Servicios
             _mapper = mapper;
         }
 
+        public bool Borrar(int ciudadId, out List<string> errores)
+        {
+            errores= new List<string>();
+            Ciudad? ciudad = _ciudadRepositorio.GetById(ciudadId);
+            if(ciudad == null)
+            {
+                errores.Add("Ciudad inexistente!!!");
+                return false;   
+
+            }
+            _ciudadRepositorio.Borrar(ciudadId);
+            return true;
+        }
+
         public bool Existe(Ciudad ciudad)
         {
             return _ciudadRepositorio.Existe(ciudad);
+        }
+
+        public CiudadEditDto? GetById(int ciudadId)
+        {
+            var ciudad= _ciudadRepositorio.GetById(ciudadId);
+            return _mapper.Map<CiudadEditDto>(ciudad);
         }
 
         public List<CiudadListDto> GetLista(int? provinciaId=null, string? textoFiltro=null)
@@ -62,7 +82,8 @@ namespace Bombones2025.Servicios.Servicios
                 ciudadDto.CiudadId=ciudad.CiudadId;//guardo el Id generado en el dto
                 return true;
             }
-            return false;//provisorio
+            _ciudadRepositorio.Editar(ciudad);
+            return true;
         }
     }
 }

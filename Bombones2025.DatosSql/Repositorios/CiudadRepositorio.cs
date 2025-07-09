@@ -19,6 +19,26 @@ namespace Bombones2025.DatosSql.Repositorios
             _dbContext.SaveChanges();
         }
 
+        public void Borrar(int ciudadId)
+        {
+            var ciudadInDb=GetById(ciudadId);
+            //Como lo traigo trackeado si existe lo remuevo
+            if (ciudadInDb!=null)
+            {
+                _dbContext.Ciudades.Remove(ciudadInDb);
+                _dbContext.SaveChanges();//confirmo el borrado
+            }
+        }
+
+        public Ciudad? GetById(int ciudadId)
+        {
+            return _dbContext.Ciudades
+                .Include(c=>c.ProvinciaEstado)
+                .ThenInclude(p=>p.Pais)
+                .FirstOrDefault(c=>c.CiudadId== ciudadId);
+
+        }
+
         public bool Existe(Ciudad ciudad)
         {
             return ciudad.CiudadId == 0 ? _dbContext.Ciudades.Any(
@@ -54,6 +74,18 @@ namespace Bombones2025.DatosSql.Repositorios
                 query = query.Where(c => c.NombreCiudad.Contains(textoFiltro));
             }
             return query.ToList();
+        }
+
+        public void Editar(Ciudad ciudad)
+        {
+            //Lo traigo trackeado
+            var ciudadInDb = GetById(ciudad.CiudadId);
+            if (ciudadInDb == null) return;
+            //lo actualizo.... por lo tanto el changetracker toma nota
+            ciudadInDb.NombreCiudad = ciudad.NombreCiudad;
+            ciudadInDb.ProvinciaEstadoId=ciudad.ProvinciaEstadoId;
+            //confirmo y guardo los cambios
+            _dbContext.SaveChanges();
         }
     }
 }

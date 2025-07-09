@@ -24,6 +24,18 @@ namespace Bombones2025.Windows
         {
             base.OnLoad(e);
             CombosHelper.CargarComboPaises(ref CboPaises, _paisServicio);
+            if (ciudadDto != null)
+            {
+
+                var provincia = _provinciaEstadoServicio.GetById(ciudadDto.ProvinciaEstadoId);
+                CboPaises.SelectedValue = provincia!.PaisId;
+                //ACA HAY QUE CARGAR EL COMBO DE LAS PROVINCIAS!!!
+                CombosHelper.CargarComboProvincias(ref CboProvEstados, 
+                    provincia.PaisId, _provinciaEstadoServicio);
+                CboProvEstados.SelectedValue = ciudadDto.ProvinciaEstadoId;
+                TxtCiudad.Text = ciudadDto.NombreCiudad;
+                //wait.... to check
+            }
         }
         public CiudadEditDto? GetCiudad()
         {
@@ -109,6 +121,11 @@ namespace Bombones2025.Windows
                 provinciaSeleccionada = null;
             }
 
+        }
+
+        public void SetCiudad(CiudadEditDto ciudadEditar)
+        {
+            this.ciudadDto=ciudadEditar;
         }
     }
 }

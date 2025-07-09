@@ -6,9 +6,9 @@ namespace Bombones2025.DatosSql.Interfaces
     {
         void Agregar(Ciudad ciudad);
         bool Existe(Ciudad ciudad);
-        //void Editar(Ciudad ciudad);
-        //void Borrar(int ciudadId);
-        //Ciudad GetById(int ciudadId);
+        void Editar(Ciudad ciudad);
+        void Borrar(int ciudadId);
+        Ciudad? GetById(int ciudadId);
         //bool EstaRelacionado(int ciudadId);
         List<Ciudad> GetLista(int? provinciaId=null, string? textoFiltro=null);
     }
