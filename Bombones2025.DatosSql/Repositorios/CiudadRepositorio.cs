@@ -50,7 +50,7 @@ namespace Bombones2025.DatosSql.Repositorios
                     c.CiudadId != ciudad.CiudadId); 
         }
 
-        public List<Ciudad> GetLista(int? provinciaId=null, string? textoFiltro=null)
+        public List<Ciudad> GetLista(int? paisId = null, int? provinciaId=null, string? textoFiltro=null)
         {
             /*
              * Vamos a obtener la lista de las ciudades
@@ -63,8 +63,13 @@ namespace Bombones2025.DatosSql.Repositorios
             //    .ToList();
             IQueryable<Ciudad> query = _dbContext.Ciudades
                 .Include(c => c.ProvinciaEstado)
-                .ThenInclude(pe => pe.Pais)
+                .ThenInclude(pe => pe!.Pais)
                 .AsNoTracking();
+            if(paisId != null)
+            {
+                query=query.Where(c=>c.ProvinciaEstado!.PaisId== paisId);
+            }
+
             if (provinciaId != null)
             {
                 query=query.Where(c=>c.ProvinciaEstadoId==provinciaId);

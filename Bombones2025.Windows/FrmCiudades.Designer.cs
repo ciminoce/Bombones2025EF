@@ -322,12 +322,14 @@
             paísToolStripMenuItem.Name = "paísToolStripMenuItem";
             paísToolStripMenuItem.Size = new Size(180, 22);
             paísToolStripMenuItem.Text = "País";
+            paísToolStripMenuItem.Click += paísToolStripMenuItem_Click;
             // 
             // provinciaEstadoToolStripMenuItem
             // 
             provinciaEstadoToolStripMenuItem.Name = "provinciaEstadoToolStripMenuItem";
             provinciaEstadoToolStripMenuItem.Size = new Size(180, 22);
             provinciaEstadoToolStripMenuItem.Text = "Provincia/Estado";
+            provinciaEstadoToolStripMenuItem.Click += provinciaEstadoToolStripMenuItem_Click;
             // 
             // FrmCiudades
             // 

@@ -1,4 +1,5 @@
 ﻿
+using Bombones2025.Entidades.DTOs.Pais;
 using Bombones2025.Entidades.Entidades;
 using Bombones2025.Servicios.Interfaces;
 using Bombones2025.Windows.Helpers;
@@ -8,7 +9,7 @@ namespace Bombones2025.Windows
     public partial class FrmFiltroPorPais : Form
     {
         private readonly IPaisServicio _paisServicio;
-        private Pais? paisFiltro;
+        private PaisListDto? paisFiltro;
         public FrmFiltroPorPais(IPaisServicio paisServicio)
         {
             InitializeComponent();
@@ -33,7 +34,7 @@ namespace Bombones2025.Windows
             }
         }
 
-        public Pais? GetPais()
+        public PaisListDto? GetPais()
         {
             return paisFiltro;
         }
@@ -51,7 +52,7 @@ namespace Bombones2025.Windows
 
         private void CboPaises_SelectedIndexChanged(object sender, EventArgs e)
         {
-            paisFiltro = CboPaises.SelectedIndex > 0 ? (Pais)CboPaises.SelectedItem!
+            paisFiltro = CboPaises.SelectedIndex > 0 ? (PaisListDto)CboPaises.SelectedItem!
                 : null;
         }
     }

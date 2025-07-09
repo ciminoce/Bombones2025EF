@@ -44,9 +44,9 @@ namespace Bombones2025.Servicios.Servicios
             return _mapper.Map<CiudadEditDto>(ciudad);
         }
 
-        public List<CiudadListDto> GetLista(int? provinciaId=null, string? textoFiltro=null)
+        public List<CiudadListDto> GetLista(int? paisId=null, int? provinciaId=null, string? textoFiltro=null)
         {
-            var ciudades = _ciudadRepositorio.GetLista(provinciaId,textoFiltro);
+            var ciudades = _ciudadRepositorio.GetLista(paisId, provinciaId,textoFiltro);
             /*
              * Muestro cómo se haría para mandar la lista de dtos
              * sin utilizar Automapper, utilizando Select de linq
@@ -66,6 +66,7 @@ namespace Bombones2025.Servicios.Servicios
              */
             return _mapper.Map<List<CiudadListDto>>(ciudades);
         }
+
 
         public bool Guardar(CiudadEditDto ciudadDto, out List<string> errores)
         {

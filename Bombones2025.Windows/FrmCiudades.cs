@@ -141,7 +141,7 @@ namespace Bombones2025.Windows
                 if (_ciudadServicio.Guardar(ciudadEditar, out var errores))
                 {
                     var ceEditadoDto = _mapper.Map<CiudadListDto>(ciudadEditar);
-                    var provDto=_provinciaServicio.GetById(ciudadEditar.ProvinciaEstadoId);
+                    var provDto = _provinciaServicio.GetById(ciudadEditar.ProvinciaEstadoId);
 
                     var paisDto = _paisServicio.GetById(provDto!.PaisId);
 
@@ -210,7 +210,7 @@ namespace Bombones2025.Windows
             if (textoFiltro == null) return;
             try
             {
-                ciudades = _ciudadServicio.GetLista(null, textoFiltro);
+                ciudades = _ciudadServicio.GetLista(null, null, textoFiltro);
                 MostrarDatosEnGrilla();
             }
             catch (Exception)
@@ -218,6 +218,45 @@ namespace Bombones2025.Windows
 
                 throw;
             }
+        }
+
+        private void paísToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmFiltroPorPais frm = new FrmFiltroPorPais(_paisServicio) { Text = "Seleccionar País a Filtrar" };
+            DialogResult dr = frm.ShowDialog(this);
+            if (dr == DialogResult.Cancel) return;
+            var paisFiltrar = frm.GetPais();
+            if (paisFiltrar == null) return;
+            try
+            {
+                ciudades = _ciudadServicio.GetLista(paisFiltrar.PaisId);
+                MostrarDatosEnGrilla();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        private void provinciaEstadoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmProvinciaFiltro frm = new FrmProvinciaFiltro(_paisServicio,_provinciaServicio) { Text = "Seleccionar País y Provincia a Filtrar" };
+            DialogResult dr = frm.ShowDialog(this);
+            if (dr == DialogResult.Cancel) return;
+            var provinciaFiltrar = frm.GetProvincia();
+            if (provinciaFiltrar == null) return;
+            try
+            {
+                ciudades = _ciudadServicio.GetLista(null, provinciaFiltrar.ProvinciaEstadoId);
+                MostrarDatosEnGrilla();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
         }
     }
 }

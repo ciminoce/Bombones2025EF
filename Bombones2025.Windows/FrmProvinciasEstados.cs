@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using Bombones2025.Entidades.DTOs.ProvinciaEstado;
-using Bombones2025.Entidades.Entidades;
 using Bombones2025.Servicios.Interfaces;
 using Bombones2025.Windows.Helpers;
 using Bombones2025.Windows.Properties;
@@ -61,7 +60,7 @@ namespace Bombones2025.Windows
                 FrmFiltroPorPais frm = new FrmFiltroPorPais(_paisServicio);
                 DialogResult dr = frm.ShowDialog(this);
                 if (dr == DialogResult.Cancel) return;
-                Pais? paisFiltro = frm.GetPais();
+                var paisFiltro = frm.GetPais();
                 if (paisFiltro is null) return;
                 try
                 {
