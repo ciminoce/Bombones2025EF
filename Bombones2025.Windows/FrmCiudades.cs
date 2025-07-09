@@ -45,11 +45,11 @@ namespace Bombones2025.Windows
 
         private void TsbNuevo_Click(object sender, EventArgs e)
         {
-            //FrmCiudadesAE frm = new FrmCiudadesAE(_ciudadServicio) { Text = "Agregar Fruto Seco" };
-            //DialogResult dr = frm.ShowDialog(this);
-            //if (dr == DialogResult.Cancel) return;
-            //var ciudadEditDto = frm.GetCiudad();
-            //if (ciudadEditDto is null) return;
+            FrmCiudadesAE frm = new FrmCiudadesAE(_paisServicio) { Text = "Agregar Fruto Seco" };
+            DialogResult dr = frm.ShowDialog(this);
+            if (dr == DialogResult.Cancel) return;
+            var ciudadEditDto = frm.GetCiudad();
+            if (ciudadEditDto is null) return;
             //try
             //{
             //    if (_ciudadServicio.Guardar(ciudadEditDto, out var errores))

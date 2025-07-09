@@ -1,24 +1,23 @@
 ﻿using Bombones2025.Entidades.DTOs.Ciudad;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+using Bombones2025.Servicios.Interfaces;
+using Bombones2025.Windows.Helpers;
 
 namespace Bombones2025.Windows
 {
     public partial class FrmCiudadesAE : Form
     {
         private CiudadEditDto? ciudadDto;
-        public FrmCiudadesAE(Servicios.Interfaces.ICiudadServicio ciudadServicio)
+        private IPaisServicio _paisServicio;
+        public FrmCiudadesAE(IPaisServicio paisServicio)
         {
             InitializeComponent();
+            _paisServicio = paisServicio;
         }
-
+        protected override void OnLoad(EventArgs e)
+        {
+            base.OnLoad(e);
+            CombosHelper.CargarComboPaises(ref CboPaises, _paisServicio);
+        }
         public CiudadEditDto GetCiudad()
         {
             throw new NotImplementedException();
