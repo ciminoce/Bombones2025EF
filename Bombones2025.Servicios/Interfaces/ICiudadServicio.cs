@@ -9,7 +9,7 @@ namespace Bombones2025.Servicios.Interfaces
         bool Existe(Ciudad ciudad);
         bool Guardar(CiudadEditDto ciudadDto, out List<string> errores);
         //CiudadEditDto? GetById(int ciudadId);
-        List<CiudadListDto> GetLista();
+        List<CiudadListDto> GetLista(int? provinciaId=null, string? textoFiltro=null);
 
     }
 }

@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             splitContainer1 = new SplitContainer();
             dgvDatos = new DataGridView();
             colId = new DataGridViewTextBoxColumn();
@@ -94,8 +94,8 @@
             // 
             dgvDatos.AllowUserToAddRows = false;
             dgvDatos.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle6.BackColor = Color.FromArgb(224, 224, 224);
-            dgvDatos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle1.BackColor = Color.FromArgb(224, 224, 224);
+            dgvDatos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             dgvDatos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvDatos.Columns.AddRange(new DataGridViewColumn[] { colId, colCiudad, colProvinciaEstado, colPais });
             dgvDatos.Dock = DockStyle.Fill;
@@ -313,19 +313,20 @@
             // textoToolStripMenuItem
             // 
             textoToolStripMenuItem.Name = "textoToolStripMenuItem";
-            textoToolStripMenuItem.Size = new Size(163, 22);
+            textoToolStripMenuItem.Size = new Size(180, 22);
             textoToolStripMenuItem.Text = "Texto";
+            textoToolStripMenuItem.Click += textoToolStripMenuItem_Click;
             // 
             // paísToolStripMenuItem
             // 
             paísToolStripMenuItem.Name = "paísToolStripMenuItem";
-            paísToolStripMenuItem.Size = new Size(163, 22);
+            paísToolStripMenuItem.Size = new Size(180, 22);
             paísToolStripMenuItem.Text = "País";
             // 
             // provinciaEstadoToolStripMenuItem
             // 
             provinciaEstadoToolStripMenuItem.Name = "provinciaEstadoToolStripMenuItem";
-            provinciaEstadoToolStripMenuItem.Size = new Size(163, 22);
+            provinciaEstadoToolStripMenuItem.Size = new Size(180, 22);
             provinciaEstadoToolStripMenuItem.Text = "Provincia/Estado";
             // 
             // FrmCiudades

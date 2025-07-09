@@ -196,5 +196,24 @@ namespace Bombones2025.Windows
         {
             Close();
         }
+
+        private void textoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmFiltro frm = new FrmFiltro() { Text = "Filtrar por texto" };
+            DialogResult dr = frm.ShowDialog(this);
+            if (dr == DialogResult.Cancel) return;
+            var textoFiltro = frm.GetTexto();
+            if (textoFiltro == null) return;
+            try
+            {
+                ciudades = _ciudadServicio.GetLista(null,textoFiltro);
+                MostrarDatosEnGrilla();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

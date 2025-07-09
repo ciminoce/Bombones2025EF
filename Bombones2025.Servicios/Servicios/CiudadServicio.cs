@@ -24,9 +24,9 @@ namespace Bombones2025.Servicios.Servicios
             return _ciudadRepositorio.Existe(ciudad);
         }
 
-        public List<CiudadListDto> GetLista()
+        public List<CiudadListDto> GetLista(int? provinciaId=null, string? textoFiltro=null)
         {
-            var ciudades = _ciudadRepositorio.GetLista();
+            var ciudades = _ciudadRepositorio.GetLista(provinciaId,textoFiltro);
             /*
              * Muestro cómo se haría para mandar la lista de dtos
              * sin utilizar Automapper, utilizando Select de linq

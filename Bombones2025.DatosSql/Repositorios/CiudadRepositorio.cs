@@ -30,17 +30,30 @@ namespace Bombones2025.DatosSql.Repositorios
                     c.CiudadId != ciudad.CiudadId); 
         }
 
-        public List<Ciudad> GetLista()
+        public List<Ciudad> GetLista(int? provinciaId=null, string? textoFiltro=null)
         {
             /*
              * Vamos a obtener la lista de las ciudades
              * con todos sus datos incluidos los datos del país
              * y del estado
              */
-            return _dbContext.Ciudades.Include(c=>c.ProvinciaEstado)
-                .ThenInclude(pe=>pe.Pais)
-                .AsNoTracking()
-                .ToList();
+            //return _dbContext.Ciudades.Include(c=>c.ProvinciaEstado)
+            //    .ThenInclude(pe=>pe.Pais)
+            //    .AsNoTracking()
+            //    .ToList();
+            IQueryable<Ciudad> query = _dbContext.Ciudades
+                .Include(c => c.ProvinciaEstado)
+                .ThenInclude(pe => pe.Pais)
+                .AsNoTracking();
+            if (provinciaId != null)
+            {
+                query=query.Where(c=>c.ProvinciaEstadoId==provinciaId);
+            }
+            if(textoFiltro != null)
+            {
+                query = query.Where(c => c.NombreCiudad.Contains(textoFiltro));
+            }
+            return query.ToList();
         }
     }
 }

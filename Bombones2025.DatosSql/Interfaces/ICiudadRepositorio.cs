@@ -10,6 +10,6 @@ namespace Bombones2025.DatosSql.Interfaces
         //void Borrar(int ciudadId);
         //Ciudad GetById(int ciudadId);
         //bool EstaRelacionado(int ciudadId);
-        List<Ciudad> GetLista();
+        List<Ciudad> GetLista(int? provinciaId=null, string? textoFiltro=null);
     }
 }
