@@ -45,7 +45,7 @@ namespace Bombones2025.Windows
 
         private void TsbNuevo_Click(object sender, EventArgs e)
         {
-            FrmCiudadesAE frm = new FrmCiudadesAE(_paisServicio) { Text = "Agregar Fruto Seco" };
+            FrmCiudadesAE frm = new FrmCiudadesAE(_paisServicio, _provinciaServicio) { Text = "Agregar Fruto Seco" };
             DialogResult dr = frm.ShowDialog(this);
             if (dr == DialogResult.Cancel) return;
             var ciudadEditDto = frm.GetCiudad();

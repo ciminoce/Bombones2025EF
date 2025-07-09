@@ -31,8 +31,8 @@ namespace Bombones2025.Windows.Helpers
             };
             listaProvincias.Insert(0, defaultProvincia);
             cbo.DataSource = listaProvincias;
-            cbo.DisplayMember = "NombreProvincia";
-            cbo.ValueMember = "ProvinciaId";
+            cbo.DisplayMember = "NombreProvinciaEstado";
+            cbo.ValueMember = "ProvinciaEstadoId";
             cbo.SelectedIndex = 0;
         }
 
