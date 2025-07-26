@@ -21,7 +21,7 @@ namespace Bombones2025.DatosSql.Repositorios
 
         public void Borrar(int ciudadId)
         {
-            var ciudadInDb=GetById(ciudadId);
+            var ciudadInDb=ObtenerPorId(ciudadId);
             //Como lo traigo trackeado si existe lo remuevo
             if (ciudadInDb!=null)
             {
@@ -30,7 +30,7 @@ namespace Bombones2025.DatosSql.Repositorios
             }
         }
 
-        public Ciudad? GetById(int ciudadId)
+        public Ciudad? ObtenerPorId(int ciudadId)
         {
             return _dbContext.Ciudades
                 .Include(c=>c.ProvinciaEstado)
@@ -50,7 +50,7 @@ namespace Bombones2025.DatosSql.Repositorios
                     c.CiudadId != ciudad.CiudadId); 
         }
 
-        public List<Ciudad> GetLista(int? paisId = null, int? provinciaId=null, string? textoFiltro=null)
+        public List<Ciudad> ObtenerLista(int? paisId = null, int? provinciaId=null, string? textoFiltro=null)
         {
             /*
              * Vamos a obtener la lista de las ciudades
@@ -84,7 +84,7 @@ namespace Bombones2025.DatosSql.Repositorios
         public void Editar(Ciudad ciudad)
         {
             //Lo traigo trackeado
-            var ciudadInDb = GetById(ciudad.CiudadId);
+            var ciudadInDb = ObtenerPorId(ciudad.CiudadId);
             if (ciudadInDb == null) return;
             //lo actualizo.... por lo tanto el changetracker toma nota
             ciudadInDb.NombreCiudad = ciudad.NombreCiudad;

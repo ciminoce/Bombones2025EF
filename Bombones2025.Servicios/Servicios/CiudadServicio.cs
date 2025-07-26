@@ -22,7 +22,7 @@ namespace Bombones2025.Servicios.Servicios
         public bool Borrar(int ciudadId, out List<string> errores)
         {
             errores= new List<string>();
-            Ciudad? ciudad = _ciudadRepositorio.GetById(ciudadId);
+            Ciudad? ciudad = _ciudadRepositorio.ObtenerPorId(ciudadId);
             if(ciudad == null)
             {
                 errores.Add("Ciudad inexistente!!!");
@@ -38,15 +38,15 @@ namespace Bombones2025.Servicios.Servicios
             return _ciudadRepositorio.Existe(ciudad);
         }
 
-        public CiudadEditDto? GetById(int ciudadId)
+        public CiudadEditDto? ObtenerPorId(int ciudadId)
         {
-            var ciudad= _ciudadRepositorio.GetById(ciudadId);
+            var ciudad= _ciudadRepositorio.ObtenerPorId(ciudadId);
             return _mapper.Map<CiudadEditDto>(ciudad);
         }
 
-        public List<CiudadListDto> GetLista(int? paisId=null, int? provinciaId=null, string? textoFiltro=null)
+        public List<CiudadListDto> ObtenerLista(int? paisId=null, int? provinciaId=null, string? textoFiltro=null)
         {
-            var ciudades = _ciudadRepositorio.GetLista(paisId, provinciaId,textoFiltro);
+            var ciudades = _ciudadRepositorio.ObtenerLista(paisId, provinciaId,textoFiltro);
             /*
              * Muestro cómo se haría para mandar la lista de dtos
              * sin utilizar Automapper, utilizando Select de linq

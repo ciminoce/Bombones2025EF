@@ -8,7 +8,7 @@ namespace Bombones2025.DatosSql.Interfaces
         void Borrar(int frutoId);
         void Editar(FrutoSeco fruto);
         bool Existe(FrutoSeco fruto);
-        List<FrutoSeco> GetLista(string? textoFiltro=null);
-        int GetCantidad();
+        List<FrutoSeco> ObtenerLista(string? textoFiltro=null);
+        int ObtenerCantidad();
     }
 }

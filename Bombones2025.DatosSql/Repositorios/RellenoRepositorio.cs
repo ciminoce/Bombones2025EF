@@ -43,7 +43,7 @@ namespace Bombones2025.DatosSql.Repositorios
                     && p.RellenoId == relleno.RellenoId);
         }
 
-        public List<Relleno> GetLista(string? textoFiltro = null)
+        public List<Relleno> ObtenerLista(string? textoFiltro = null)
         {
             return textoFiltro is null
                 ? _dbContext.Rellenos.AsNoTracking().ToList()
@@ -51,7 +51,7 @@ namespace Bombones2025.DatosSql.Repositorios
                 .Where(p => p.Descripcion.StartsWith(textoFiltro))
                 .ToList();
         }
-        public int GetCantidad() => _dbContext.Rellenos.Count();
+        public int ObtenerCantidad() => _dbContext.Rellenos.Count();
 
     }
 }

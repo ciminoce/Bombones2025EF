@@ -33,7 +33,7 @@ namespace Bombones2025.Windows
         {
             try
             {
-                ciudades = _ciudadServicio.GetLista();
+                ciudades = _ciudadServicio.ObtenerLista();
                 MostrarDatosEnGrilla();
             }
             catch (Exception)
@@ -57,9 +57,9 @@ namespace Bombones2025.Windows
                     //Tengo que generar un CiudadListDto para mostrarlo en la grilla
                     CiudadListDto ciudadDto = _mapper.Map<CiudadListDto>(ciudadEditDto);
                     //Tengo que obtener los datos que me faltan!!!
-                    var provinciaDto = _provinciaServicio.GetById(ciudadEditDto.ProvinciaEstadoId);
+                    var provinciaDto = _provinciaServicio.ObtenerPorId(ciudadEditDto.ProvinciaEstadoId);
                     ciudadDto.NombreProvincia = provinciaDto.NombreProvinciaEstado;
-                    var paisDto = _paisServicio.GetById(provinciaDto.PaisId);
+                    var paisDto = _paisServicio.ObtenerPorId(provinciaDto.PaisId);
                     ciudadDto.NombrePais = paisDto.NombrePais;
                     //Joya ya tengo todos los datos... ahora lo muestro
                     DataGridViewRow r = GridHelper.ConstruirFila(dgvDatos);
@@ -128,7 +128,7 @@ namespace Bombones2025.Windows
             DataGridViewRow r = dgvDatos.SelectedRows[0];
             var ciudadDto = r.Tag as CiudadListDto;
             if (ciudadDto is null) return;
-            var ciudadEditar = _ciudadServicio.GetById(ciudadDto.CiudadId);
+            var ciudadEditar = _ciudadServicio.ObtenerPorId(ciudadDto.CiudadId);
             if (ciudadEditar is null) return;
             FrmCiudadesAE frm = new FrmCiudadesAE(_paisServicio, _provinciaServicio) { Text = "Editar Fruto Seco" };
             frm.SetCiudad(ciudadEditar);
@@ -141,9 +141,9 @@ namespace Bombones2025.Windows
                 if (_ciudadServicio.Guardar(ciudadEditar, out var errores))
                 {
                     var ceEditadoDto = _mapper.Map<CiudadListDto>(ciudadEditar);
-                    var provDto = _provinciaServicio.GetById(ciudadEditar.ProvinciaEstadoId);
+                    var provDto = _provinciaServicio.ObtenerPorId(ciudadEditar.ProvinciaEstadoId);
 
-                    var paisDto = _paisServicio.GetById(provDto!.PaisId);
+                    var paisDto = _paisServicio.ObtenerPorId(provDto!.PaisId);
 
                     ceEditadoDto.NombrePais = paisDto!.NombrePais;
                     ceEditadoDto.NombreProvincia = provDto.NombreProvinciaEstado;
@@ -173,7 +173,7 @@ namespace Bombones2025.Windows
             {
                 filterOn = false;
                 TsbFiltrar.Image = Resources.filter_40px;
-                ciudades = _ciudadServicio.GetLista();
+                ciudades = _ciudadServicio.ObtenerLista();
                 MostrarDatosEnGrilla();
 
             }
@@ -210,7 +210,7 @@ namespace Bombones2025.Windows
             if (textoFiltro == null) return;
             try
             {
-                ciudades = _ciudadServicio.GetLista(null, null, textoFiltro);
+                ciudades = _ciudadServicio.ObtenerLista(null, null, textoFiltro);
                 MostrarDatosEnGrilla();
             }
             catch (Exception)
@@ -229,7 +229,7 @@ namespace Bombones2025.Windows
             if (paisFiltrar == null) return;
             try
             {
-                ciudades = _ciudadServicio.GetLista(paisFiltrar.PaisId);
+                ciudades = _ciudadServicio.ObtenerLista(paisFiltrar.PaisId);
                 MostrarDatosEnGrilla();
             }
             catch (Exception)
@@ -248,7 +248,7 @@ namespace Bombones2025.Windows
             if (provinciaFiltrar == null) return;
             try
             {
-                ciudades = _ciudadServicio.GetLista(null, provinciaFiltrar.ProvinciaEstadoId);
+                ciudades = _ciudadServicio.ObtenerLista(null, provinciaFiltrar.ProvinciaEstadoId);
                 MostrarDatosEnGrilla();
             }
             catch (Exception)

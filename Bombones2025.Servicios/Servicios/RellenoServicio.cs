@@ -21,9 +21,9 @@ namespace Bombones2025.Servicios.Servicios
             return _rellenoRepositorio.Existe(relleno);
         }
 
-        public List<RellenoListDto> GetLista(string? textoFiltro=null)
+        public List<RellenoListDto> ObtenerLista(string? textoFiltro=null)
         {
-            var rellenos= _rellenoRepositorio.GetLista(textoFiltro);
+            var rellenos= _rellenoRepositorio.ObtenerLista(textoFiltro);
             return _mapper.Map<List<RellenoListDto>>(rellenos);
         }
 

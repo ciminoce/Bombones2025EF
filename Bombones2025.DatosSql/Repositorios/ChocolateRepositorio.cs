@@ -31,7 +31,9 @@ namespace Bombones2025.DatosSql.Repositorios
 
         public void Editar(Chocolate chocolate)
         {
-            _dbContext.Chocolates.Update(chocolate);
+            var chocoInDb = ObtenerPorId(chocolate.ChocolateId);
+            if (chocoInDb == null) return;
+            chocoInDb.Descripcion=chocolate.Descripcion;
             _dbContext.SaveChanges();
         }
 
@@ -43,7 +45,7 @@ namespace Bombones2025.DatosSql.Repositorios
                     && p.ChocolateId == chocolate.ChocolateId);
         }
 
-        public List<Chocolate> GetLista(string? textoFiltro = null)
+        public List<Chocolate> ObtenerLista(string? textoFiltro = null)
         {
             return textoFiltro is null
                 ? _dbContext.Chocolates.AsNoTracking().ToList()
@@ -51,6 +53,11 @@ namespace Bombones2025.DatosSql.Repositorios
                 .Where(p => p.Descripcion.StartsWith(textoFiltro))
                 .ToList();
         }
-        public int GetCantidad() => _dbContext.Chocolates.Count();
+        public int ObtenerCantidad() => _dbContext.Chocolates.Count();
+
+        public Chocolate? ObtenerPorId(int id)
+        {
+            return _dbContext.Chocolates.FirstOrDefault(c=>c.ChocolateId==id);
+        }
     }
 }

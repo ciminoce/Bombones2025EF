@@ -21,9 +21,9 @@ namespace Bombones2025.Servicios.Servicios
             return _frutoRepositorio.Existe(fruto);
         }
 
-        public List<FrutoSecoListDto> GetLista(string? textoFiltro = null)
+        public List<FrutoSecoListDto> ObtenerLista(string? textoFiltro = null)
         {
-            var frutos= _frutoRepositorio.GetLista(textoFiltro);
+            var frutos= _frutoRepositorio.ObtenerLista(textoFiltro);
             return _mapper.Map<List<FrutoSecoListDto>>(frutos);
         }
 

@@ -5,8 +5,8 @@ namespace Bombones2025.Servicios.Interfaces
     public interface IProvinciaEstadoServicio
     {
         bool Borrar(int provinciaEstadoId, out List<string> errores);
-        ProvinciaEstadoEditDto? GetById(int provinciaEstadoId);
-        List<ProvinciaEstadoListDto> GetLista(int? paisId = null, string? textoFiltro = null);
+        ProvinciaEstadoEditDto? ObtenerPorId(int provinciaEstadoId);
+        List<ProvinciaEstadoListDto> ObtenerLista(int? paisId = null, string? textoFiltro = null);
         bool Guardar(ProvinciaEstadoEditDto provinciaEstadoDto, out List<string> errores);
 
     }

@@ -29,15 +29,15 @@ namespace Bombones2025.Servicios.Servicios
             return true;
         }
 
-        public ProvinciaEstadoEditDto? GetById(int provinciaEstadoId)
+        public ProvinciaEstadoEditDto? ObtenerPorId(int provinciaEstadoId)
         {
-            var pe= _provinciaRepositorio.GetById(provinciaEstadoId);
+            var pe= _provinciaRepositorio.ObtenerPorId(provinciaEstadoId);
             return _mapper.Map<ProvinciaEstadoEditDto>(pe);
         }
 
-        public List<ProvinciaEstadoListDto> GetLista(int? paisId = null, string? textoFiltro = null)
+        public List<ProvinciaEstadoListDto> ObtenerLista(int? paisId = null, string? textoFiltro = null)
         {
-            var provincias= _provinciaRepositorio.GetLista(paisId,textoFiltro);
+            var provincias= _provinciaRepositorio.ObtenerLista(paisId,textoFiltro);
             return _mapper.Map<List<ProvinciaEstadoListDto>>(provincias);
         }
 

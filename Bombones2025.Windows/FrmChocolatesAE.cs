@@ -1,5 +1,4 @@
 ﻿using Bombones2025.Entidades.DTOs.Chocolate;
-using Bombones2025.Entidades.Entidades;
 
 namespace Bombones2025.Windows
 {

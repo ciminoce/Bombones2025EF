@@ -26,7 +26,7 @@ namespace Bombones2025.Windows
         {
             try
             {
-                _paises = _paisServicio.GetLista();
+                _paises = _paisServicio.ObtenerLista();
                 MostrarDatosEnGrilla();
 
             }
@@ -136,7 +136,7 @@ namespace Bombones2025.Windows
             var r = dgvDatos.SelectedRows[0];
             PaisListDto? paisListDto = (PaisListDto)r.Tag!;
             if (paisListDto == null) return;
-            PaisEditDto? paisEditDto=_paisServicio.GetById(paisListDto.PaisId);
+            PaisEditDto? paisEditDto=_paisServicio.ObtenerPorId(paisListDto.PaisId);
             if (paisEditDto is null) return;
             FrmPaisesAE frm = new FrmPaisesAE() { Text = "Editar País" };
             frm.SetPais(paisEditDto);
@@ -182,7 +182,7 @@ namespace Bombones2025.Windows
                 if (textoParaFiltrar is null) return;
                 try
                 {
-                    _paises = _paisServicio.GetLista(textoParaFiltrar);
+                    _paises = _paisServicio.ObtenerLista(textoParaFiltrar);
                     MostrarDatosEnGrilla();
                     TsbFiltrar.Image = Resources.filter_intense_40px;
                     filterOn = true;
@@ -208,7 +208,7 @@ namespace Bombones2025.Windows
             {
                 filterOn = false;
                 TsbFiltrar.Image = Resources.filter_40px;
-                _paises = _paisServicio.GetLista();
+                _paises = _paisServicio.ObtenerLista();
                 MostrarDatosEnGrilla();
             }
             catch (Exception ex)

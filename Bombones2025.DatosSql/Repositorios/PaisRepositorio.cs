@@ -45,7 +45,7 @@ namespace Bombones2025.DatosSql.Repositorios
                     && p.PaisId != pais.PaisId);
         }
 
-        public List<Pais> GetLista(string? textoFiltro = null)
+        public List<Pais> ObtenerLista(string? textoFiltro = null)
         {
             return textoFiltro is null
                 ? _dbContext.Paises.AsNoTracking().ToList()
@@ -53,7 +53,7 @@ namespace Bombones2025.DatosSql.Repositorios
                 .Where(p => p.NombrePais.StartsWith(textoFiltro))
                 .ToList();
         }
-        public int GetCantidad() => _dbContext.Paises.Count();
+        public int ObtenerCantidad() => _dbContext.Paises.Count();
 
         public bool EstaRelacionado(int paisId)
         {

@@ -7,7 +7,7 @@ namespace Bombones2025.Servicios.Interfaces
     {
         bool Borrar(int rellenoId, out List<string> errores);
         bool Existe(Relleno relleno);
-        List<RellenoListDto> GetLista(string? textoFiltro = null);
+        List<RellenoListDto> ObtenerLista(string? textoFiltro = null);
         bool Guardar(RellenoEditDto rellenoDto, out List<string> errores);
     }
 }

@@ -8,7 +8,7 @@ namespace Bombones2025.Windows.Helpers
     {
         public static void CargarComboPaises(ref ComboBox cbo, IPaisServicio paisServicio)
         {
-            var listaPaises = paisServicio.GetLista();
+            var listaPaises = paisServicio.ObtenerLista();
             var defaultPais = new PaisListDto
             {
                 PaisId = 0,
@@ -22,7 +22,7 @@ namespace Bombones2025.Windows.Helpers
         }
         public static void CargarComboProvincias(ref ComboBox cbo, int paisId, IProvinciaEstadoServicio provinciaServicio)
         {
-            var listaProvincias = provinciaServicio.GetLista(paisId);
+            var listaProvincias = provinciaServicio.ObtenerLista(paisId);
             var defaultProvincia = new ProvinciaEstadoListDto
             {
                 ProvinciaEstadoId = 0,

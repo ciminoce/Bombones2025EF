@@ -27,7 +27,7 @@ namespace Bombones2025.Windows
             if (ciudadDto != null)
             {
 
-                var provincia = _provinciaEstadoServicio.GetById(ciudadDto.ProvinciaEstadoId);
+                var provincia = _provinciaEstadoServicio.ObtenerPorId(ciudadDto.ProvinciaEstadoId);
                 CboPaises.SelectedValue = provincia!.PaisId;
                 //ACA HAY QUE CARGAR EL COMBO DE LAS PROVINCIAS!!!
                 CombosHelper.CargarComboProvincias(ref CboProvEstados, 

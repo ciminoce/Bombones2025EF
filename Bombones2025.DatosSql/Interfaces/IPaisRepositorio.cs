@@ -8,8 +8,8 @@ namespace Bombones2025.DatosSql.Interfaces
         void Borrar(int paisId);
         void Editar(Pais pais);
         bool Existe(Pais pais);
-        List<Pais> GetLista(string? textoFiltro=null);
-        int GetCantidad();
+        List<Pais> ObtenerLista(string? textoFiltro=null);
+        int ObtenerCantidad();
         bool EstaRelacionado(int paisId);
         Pais? GetPorId(int paisId);
     }

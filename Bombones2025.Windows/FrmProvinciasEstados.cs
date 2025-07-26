@@ -31,7 +31,7 @@ namespace Bombones2025.Windows
         {
             try
             {
-                provincias = _provinciaServicio.GetLista();
+                provincias = _provinciaServicio.ObtenerLista();
                 MostrarDatosEnGrilla();
             }
             catch (Exception)
@@ -64,7 +64,7 @@ namespace Bombones2025.Windows
                 if (paisFiltro is null) return;
                 try
                 {
-                    provincias = _provinciaServicio.GetLista(paisFiltro.PaisId);
+                    provincias = _provinciaServicio.ObtenerLista(paisFiltro.PaisId);
                     MostrarDatosEnGrilla();
                     TsbFiltrar.Image = Resources.filter_intense_40px;
                     filterOn = true;
@@ -90,7 +90,7 @@ namespace Bombones2025.Windows
             {
                 filterOn = false;
                 TsbFiltrar.Image = Resources.filter_40px;
-                provincias = _provinciaServicio.GetLista();
+                provincias = _provinciaServicio.ObtenerLista();
                 MostrarDatosEnGrilla();
 
             }
@@ -112,7 +112,7 @@ namespace Bombones2025.Windows
                 if (textoFiltro is null) return;
                 try
                 {
-                    provincias = _provinciaServicio.GetLista(null, textoFiltro);
+                    provincias = _provinciaServicio.ObtenerLista(null, textoFiltro);
                     MostrarDatosEnGrilla();
                     TsbFiltrar.Image = Resources.filter_intense_40px;
                     filterOn = true;
@@ -143,9 +143,9 @@ namespace Bombones2025.Windows
             {
                 if (_provinciaServicio.Guardar(provEstado, out var errores))
                 {
-                    //var peAgregadoDto = _provinciaServicio.GetById(provEstado.ProvinciaEstadoId);
+                    //var peAgregadoDto = _provinciaServicio.ObtenerPorId(provEstado.ProvinciaEstadoId);
                     var peListDto = _mapper.Map<ProvinciaEstadoListDto>(provEstado);
-                    var paisDto = _paisServicio.GetById(provEstado!.PaisId);
+                    var paisDto = _paisServicio.ObtenerPorId(provEstado!.PaisId);
                     peListDto.NombrePais = paisDto!.NombrePais;
                     DataGridViewRow r = GridHelper.ConstruirFila(dgvDatos);
                     GridHelper.SetearFila(r, peListDto!);
@@ -213,7 +213,7 @@ namespace Bombones2025.Windows
             DataGridViewRow r = dgvDatos.SelectedRows[0];
             var pe = r.Tag as ProvinciaEstadoListDto;
             if (pe is null) return;
-            var peEditar = _provinciaServicio.GetById(pe.ProvinciaEstadoId);
+            var peEditar = _provinciaServicio.ObtenerPorId(pe.ProvinciaEstadoId);
             if (peEditar is null) return;
             FrmProvinciaEstadoAE frm = new FrmProvinciaEstadoAE(_paisServicio) { Text = "Editar Fruto Seco" };
             frm.SetProvincia(peEditar);
@@ -226,7 +226,7 @@ namespace Bombones2025.Windows
                 if (_provinciaServicio.Guardar(peEditar, out var errores))
                 {
                     var peEditadoDto = _mapper.Map<ProvinciaEstadoListDto>(peEditar);
-                    var paisDto = _paisServicio.GetById(peEditar.PaisId);
+                    var paisDto = _paisServicio.ObtenerPorId(peEditar.PaisId);
                     peEditadoDto.NombrePais = paisDto!.NombrePais;
                     GridHelper.SetearFila(r, peEditadoDto!);
                     MessageBox.Show("Registro Editado", "Información",

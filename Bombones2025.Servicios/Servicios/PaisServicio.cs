@@ -55,9 +55,9 @@ namespace Bombones2025.Servicios.Servicios
         }
 
 
-        public List<PaisListDto> GetLista(string? textoFiltro = null)
+        public List<PaisListDto> ObtenerLista(string? textoFiltro = null)
         {
-            var paises= _paisRepositorio.GetLista(textoFiltro);
+            var paises= _paisRepositorio.ObtenerLista(textoFiltro);
             return _mapper.Map<List<PaisListDto>>(paises);
         }
 
@@ -66,7 +66,7 @@ namespace Bombones2025.Servicios.Servicios
             throw new NotImplementedException();
         }
 
-        public PaisEditDto? GetById(int paisId)
+        public PaisEditDto? ObtenerPorId(int paisId)
         {
             Pais? pais= _paisRepositorio.GetPorId(paisId);
             if (pais is null) return null;

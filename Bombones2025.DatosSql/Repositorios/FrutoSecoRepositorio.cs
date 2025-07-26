@@ -43,7 +43,7 @@ namespace Bombones2025.DatosSql.Repositorios
                     && p.FrutoSecoId == frutoSeco.FrutoSecoId);
         }
 
-        public List<FrutoSeco> GetLista(string? textoFiltro = null)
+        public List<FrutoSeco> ObtenerLista(string? textoFiltro = null)
         {
             return textoFiltro is null
                 ? _dbContext.FrutosSecos.AsNoTracking().ToList()
@@ -51,7 +51,7 @@ namespace Bombones2025.DatosSql.Repositorios
                 .Where(p => p.Descripcion.StartsWith(textoFiltro))
                 .ToList();
         }
-        public int GetCantidad() => _dbContext.FrutosSecos.Count();
+        public int ObtenerCantidad() => _dbContext.FrutosSecos.Count();
 
     }
 }

@@ -22,7 +22,7 @@ namespace Bombones2025.DatosSql.Repositorios
 
         public void Borrar(int provinciaEstadoId)
         {
-            var peEnDb = GetById(provinciaEstadoId);
+            var peEnDb = ObtenerPorId(provinciaEstadoId);
             if (peEnDb is not null)
             {
                 _dbContext.Entry(peEnDb).State = EntityState.Deleted;
@@ -39,7 +39,7 @@ namespace Bombones2025.DatosSql.Repositorios
         public void Editar(ProvinciaEstado provinciaEstado)
         {
             //TODO: Ver otra forma
-            var peEnDb = GetById(provinciaEstado.ProvinciaEstadoId);
+            var peEnDb = ObtenerPorId(provinciaEstado.ProvinciaEstadoId);
             if(peEnDb is not null)
             {
                 peEnDb.NombreProvinciaEstado = provinciaEstado.NombreProvinciaEstado;
@@ -66,7 +66,7 @@ namespace Bombones2025.DatosSql.Repositorios
                 
         }
 
-        public ProvinciaEstado? GetById(int provinciaEstadoId)
+        public ProvinciaEstado? ObtenerPorId(int provinciaEstadoId)
         {
             return _dbContext.ProvinciasEstados
                 .Include(pe=>pe.Pais)
@@ -75,7 +75,7 @@ namespace Bombones2025.DatosSql.Repositorios
                 pe.ProvinciaEstadoId==provinciaEstadoId);
         }
 
-        public List<ProvinciaEstado> GetLista(int? paisId = null, string? textoFiltro=null)
+        public List<ProvinciaEstado> ObtenerLista(int? paisId = null, string? textoFiltro=null)
         {
             IQueryable<ProvinciaEstado> query = _dbContext.ProvinciasEstados
                 .Include(p => p.Pais).AsNoTracking();

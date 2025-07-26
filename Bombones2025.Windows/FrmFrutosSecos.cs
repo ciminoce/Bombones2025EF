@@ -22,7 +22,7 @@ namespace Bombones2025.Windows
         {
             try
             {
-                lista = _servicio.GetLista();
+                lista = _servicio.ObtenerLista();
                 MostrarDatosEnGrilla();
             }
             catch (Exception)
